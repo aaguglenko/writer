@@ -16,7 +16,8 @@
       --success-bg: #d1fae5;
       --success-text: #065f46;
       --border: #e5e7eb;
-      --input-bg: #f9fafb;
+      --input-bg: #ffffff;
+      --chip-bg: #f9fafb;
       --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
@@ -28,10 +29,11 @@
       --primary: #60a5fa;
       --primary-hover: #3b82f6;
       --success: #10b981;
-      --success-bg: rgba(16, 185, 129, 0.2);
+      --success-bg: rgba(16, 185, 129, 0.18);
       --success-text: #6ee7b7;
       --border: #334155;
       --input-bg: #0f172a;
+      --chip-bg: #0f172a;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
@@ -47,7 +49,7 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.45;
-      padding: 12px 12px 60px;
+      padding: 14px 12px 60px;
       transition: background-color 0.2s, color 0.2s;
     }
 
@@ -67,7 +69,7 @@
       gap: 8px;
     }
 
-    .brand {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -75,16 +77,16 @@
 
     header h1 {
       font-size: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .goal-badge {
-      background: rgba(59, 130, 246, 0.15);
+      background: rgba(59, 130, 246, 0.14);
       color: var(--primary);
       padding: 3px 10px;
       border-radius: 999px;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -104,7 +106,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       box-shadow: var(--shadow);
     }
 
@@ -124,71 +126,50 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .date-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
     }
 
     .today-btn {
-      background: var(--input-bg);
+      background: var(--bg);
       border: 1px solid var(--border);
       padding: 4px 10px;
       border-radius: 8px;
       font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
-      color: var(--primary);
-      font-weight: 600;
+      color: var(--text);
     }
 
-    .project-select-row {
+    .book-input-row {
       display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    select {
-      flex: 1;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 11px 12px;
-      border: 1.5px solid var(--border);
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
       border-radius: 12px;
+      border: 1.5px solid var(--border);
       background: var(--input-bg);
       color: var(--text);
-      outline: none;
-      min-width: 0;
-    }
-
-    .input-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    input[type="number"], input[type="text"] {
       font-size: 16px;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      background: var(--input-bg);
-      color: var(--text);
       outline: none;
     }
 
-    input[type="number"] {
-      flex: 1;
-      font-size: 1.25rem;
-      font-weight: 700;
-      min-width: 0;
-    }
-
-    input:focus, select:focus {
+    select:focus, input:focus {
       border-color: var(--primary);
+    }
+
+    .num-add-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .num-add-row input[type="number"] {
+      font-size: 1.3rem;
+      font-weight: 700;
+      flex: 1;
     }
 
     .add-btn {
@@ -198,24 +179,20 @@
       border-radius: 12px;
       padding: 0 18px;
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
-    }
-
-    .add-btn:active {
-      background: var(--primary-hover);
     }
 
     .quick-adds {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .quick-btn {
-      background: var(--input-bg);
+      background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 9px 4px;
@@ -226,69 +203,53 @@
       text-align: center;
     }
 
-    .quick-btn:active {
-      transform: scale(0.97);
-    }
-
     .quick-btn.reset {
       color: #ef4444;
     }
 
-    .day-breakdown {
+    .entries-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .entry-chip {
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      display: inline-flex;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.88rem;
     }
 
-    .entry-chip button {
+    .entry-chip-del {
       background: none;
       border: none;
       color: #ef4444;
+      font-size: 1.1rem;
       font-weight: bold;
-      font-size: 1rem;
       cursor: pointer;
-      line-height: 1;
-      padding: 0 2px;
+      padding: 0 6px;
     }
 
     .progress-wrapper {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .progress-labels {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
-    }
-
-    .today-big-counter {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .today-pct {
       font-size: 0.9rem;
+      margin-bottom: 6px;
       font-weight: 700;
-      color: var(--primary);
     }
 
     .progress-track {
       height: 16px;
-      background: var(--input-bg);
+      background: var(--bg);
       border-radius: 999px;
       overflow: hidden;
       position: relative;
@@ -299,7 +260,7 @@
       height: 100%;
       width: 0%;
       background: var(--primary);
-      transition: width 0.3s ease, background-color 0.3s ease;
+      transition: width 0.25s ease, background-color 0.25s ease;
     }
 
     .progress-fill.completed {
@@ -315,15 +276,13 @@
 
     .tick {
       flex: 1;
-      border-right: 1px solid rgba(156, 163, 175, 0.35);
+      border-right: 1px solid rgba(255, 255, 255, 0.45);
     }
-    .tick:last-child {
-      border-right: none;
-    }
+    .tick:last-child { border-right: none; }
 
     .complete-btn {
       width: 100%;
-      padding: 13px;
+      padding: 14px;
       border-radius: 12px;
       border: 2px solid var(--border);
       background: var(--card);
@@ -335,7 +294,6 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s;
     }
 
     .complete-btn.is-done {
@@ -344,46 +302,22 @@
       color: #ffffff;
     }
 
-    .complete-btn .check-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      font-size: 0.85rem;
-    }
-
-    .complete-btn.is-done .check-icon {
-      background: #ffffff;
-      color: var(--success);
-      border-color: #ffffff;
-    }
-
     .hint-text {
       text-align: center;
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--muted);
       margin-top: 8px;
     }
 
-    .cal-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
     .cal-nav {
-      background: var(--input-bg);
+      background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text);
       width: 34px;
       height: 34px;
       border-radius: 9px;
       cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
+      font-weight: 700;
     }
 
     .calendar-grid {
@@ -395,13 +329,13 @@
 
     .cal-weekday {
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--muted);
       padding-bottom: 4px;
     }
 
     .cal-day {
-      border-radius: 9px;
+      border-radius: 10px;
       border: 1px solid var(--border);
       padding: 4px 2px;
       display: flex;
@@ -410,7 +344,7 @@
       align-items: center;
       cursor: pointer;
       background: var(--card);
-      min-height: 48px;
+      min-height: 50px;
     }
 
     .cal-day.empty {
@@ -435,59 +369,25 @@
 
     .cal-num {
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       align-self: flex-start;
       padding-left: 3px;
-      line-height: 1;
     }
 
     .cal-status {
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 0.8rem;
+      font-weight: 800;
       color: var(--success);
-      line-height: 1.1;
     }
 
     .cal-chars {
       font-size: 0.62rem;
       color: var(--muted);
-      line-height: 1;
+      font-weight: 600;
     }
 
     .cal-day.done .cal-chars {
       color: var(--success-text);
-      font-weight: 600;
-    }
-
-    .hero-stat {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(16, 185, 129, 0.12));
-      border: 1.5px solid var(--primary);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-stat-title {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    .hero-stat-val {
-      font-size: 1.45rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .hero-stat-sub {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-align: right;
     }
 
     .stats-grid {
@@ -498,20 +398,25 @@
     }
 
     .stat-box {
-      background: var(--input-bg);
+      background: var(--bg);
       padding: 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
 
+    .stat-box.highlight {
+      grid-column: 1 / -1;
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
     .stat-value {
       font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 2px;
+      font-weight: 800;
     }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: var(--muted);
     }
 
@@ -519,60 +424,44 @@
       font-size: 0.72rem;
       color: var(--primary);
       margin-top: 3px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    .books-summary-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--muted);
-    }
-
-    .book-stat-list {
+    .books-summary {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .book-stat-item {
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 10px 12px;
+    .book-stat-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 12px;
+      background: var(--bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
       gap: 10px;
     }
 
     .book-stat-name {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.9rem;
     }
 
-    .book-stat-detail {
-      font-size: 0.74rem;
+    .book-stat-meta {
+      font-size: 0.75rem;
       color: var(--muted);
     }
 
     .book-stat-total {
       text-align: right;
+      font-weight: 800;
+      font-size: 0.95rem;
       white-space: nowrap;
     }
 
-    .book-stat-chars {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--primary);
-    }
-
-    .book-stat-pages {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    .sync-card {
+    .sync-box {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -583,46 +472,31 @@
       gap: 8px;
     }
 
-    .sync-row input {
-      flex: 1;
-      min-width: 0;
-    }
-
     .sync-status {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .sync-status.ok {
-      color: var(--success);
+      font-size: 0.8rem;
       font-weight: 600;
+      color: var(--muted);
     }
 
-    .sync-status.err {
-      color: #ef4444;
-    }
+    .sync-status.ok { color: var(--success); }
+    .sync-status.err { color: #ef4444; }
 
     .backup-btns {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
-      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
     .btn-small {
-      background: var(--input-bg);
+      background: var(--card);
       border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 9px;
+      padding: 10px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 600;
       color: var(--text);
-      font-weight: 500;
-      flex: 1;
       text-align: center;
     }
 
@@ -646,7 +520,7 @@
       border-radius: 16px;
       padding: 20px;
       width: 100%;
-      max-width: 440px;
+      max-width: 480px;
       max-height: 85vh;
       overflow-y: auto;
       border: 1px solid var(--border);
@@ -656,56 +530,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .modal-form {
+    .book-manage-item {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
     }
 
-    .manage-book-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 10px;
-      background: var(--input-bg);
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
-    }
-
-    .manage-book-top {
+    .book-manage-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-weight: 600;
-    }
-
-    .manage-book-base {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .manage-book-base input {
-      width: 115px;
-      padding: 5px 8px;
-      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -713,32 +556,31 @@
 
 <div class="container">
   <header>
-    <div class="brand">
+    <div class="header-left">
       <h1>Трекер</h1>
       <span class="goal-badge">2 000 зн.</span>
     </div>
     <div class="header-actions">
       <button class="icon-btn" id="openBooksBtn">📚 Книги</button>
-      <button class="icon-btn" id="themeBtn" aria-label="Тема">🌓</button>
+      <button class="icon-btn" id="themeToggleBtn">🌓</button>
     </div>
   </header>
 
   <section class="card">
     <div class="card-title">
-      <div class="date-header">
+      <div>
         <span id="selectedDateLabel">Сегодня</span>
-        <button class="today-btn" id="jumpTodayBtn" style="display: none;">В сегодня</button>
+        <button class="today-btn" id="jumpTodayBtn" style="display: none; margin-left: 6px;">В сегодня</button>
       </div>
-      <span id="bonusBadge" style="font-size: 0.82rem; color: #f59e0b; font-weight: 700;"></span>
+      <span id="bonusBadge" style="font-size: 0.8rem; color: #f59e0b; font-weight: 700;"></span>
     </div>
 
-    <div class="project-select-row">
-      <select id="projectSelect"></select>
-    </div>
-
-    <div class="input-row">
-      <input type="number" id="charInput" min="0" step="50" placeholder="Сколько знаков?" inputmode="numeric">
-      <button class="add-btn" id="addCharsBtn">+ Добавить</button>
+    <div class="book-input-row">
+      <select id="bookSelect"></select>
+      <div class="num-add-row">
+        <input type="number" id="charInput" min="0" step="50" placeholder="Сколько знаков..." inputmode="numeric">
+        <button class="add-btn" id="addEntryBtn">+ Добавить</button>
+      </div>
     </div>
 
     <div class="quick-adds">
@@ -749,26 +591,23 @@
       <button class="quick-btn reset" id="clearDayBtn">Сброс</button>
     </div>
 
-    <div class="day-breakdown" id="dayBreakdown"></div>
+    <div class="entries-list" id="dayEntriesList"></div>
 
     <div class="progress-wrapper">
       <div class="progress-labels">
-        <span class="today-big-counter" id="progressText">Сегодня: 0 / 2 000 зн.</span>
-        <span class="today-pct" id="progressPercent">0%</span>
+        <span id="progressText">Сегодня: 0 / 2 000 зн.</span>
+        <span id="progressPercent">0%</span>
       </div>
       <div class="progress-track">
         <div class="progress-fill" id="progressFill"></div>
         <div class="ticks">
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
+          <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
         </div>
       </div>
     </div>
 
     <button class="complete-btn" id="completeBtn">
-      <span class="check-icon">✓</span>
+      <span>✓</span>
       <span id="completeBtnText">Выполнил</span>
     </button>
     <div class="hint-text" id="statusHint">При сумме 2000+ знаков за день птичка ставится сама</div>
@@ -777,7 +616,7 @@
   <section class="card">
     <div class="card-title">
       <span id="monthYearLabel">Месяц</span>
-      <div class="cal-controls">
+      <div style="display: flex; gap: 8px;">
         <button class="cal-nav" id="prevMonthBtn">←</button>
         <button class="cal-nav" id="nextMonthBtn">→</button>
       </div>
@@ -786,40 +625,28 @@
   </section>
 
   <section class="card">
-    <div class="card-title">
-      <span>Сквозная статистика</span>
-    </div>
-
-    <div class="hero-stat">
-      <div>
-        <div class="hero-stat-title">Общий объем всех книг</div>
-        <div class="hero-stat-val" id="statAllBooksChars">0 зн.</div>
-      </div>
-      <div class="hero-stat-sub">
-        <div id="statAllBooksPages">≈ 0 стр. А4</div>
-        <div style="font-size: 0.72rem; color: var(--muted); font-weight: 400;">было + в трекере</div>
-      </div>
-    </div>
-
+    <div class="card-title">Сквозная статистика</div>
     <div class="stats-grid">
+      <div class="stat-box highlight">
+        <div class="stat-value" id="statGrandTotal">0 зн.</div>
+        <div class="stat-label">Общий объем всех книг (было + написано в трекере)</div>
+        <div class="stat-sub" id="statGrandPages">≈ 0 стр. А4</div>
+      </div>
       <div class="stat-box">
         <div class="stat-value" id="statTotalChars">0</div>
         <div class="stat-label">Написано в трекере</div>
         <div class="stat-sub" id="statPages">≈ 0 стр. А4</div>
       </div>
-
       <div class="stat-box">
         <div class="stat-value" id="statDaysDone">0</div>
         <div class="stat-label">Дней с птичкой</div>
         <div class="stat-sub" id="statMonthDone">За месяц: 0</div>
       </div>
-
       <div class="stat-box">
         <div class="stat-value" id="statStreak">0 дн.</div>
         <div class="stat-label">Текущая серия</div>
         <div class="stat-sub" id="statBestStreak">Рекорд: 0 дн.</div>
       </div>
-
       <div class="stat-box">
         <div class="stat-value" id="statAvgChars">0</div>
         <div class="stat-label">Среднее в день</div>
@@ -827,23 +654,24 @@
       </div>
     </div>
 
-    <div class="books-summary-title">Объем по книгам (всего)</div>
-    <div class="book-stat-list" id="bookStatList"></div>
+    <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 8px;">Объем по книгам (всего)</div>
+    <div class="books-summary" id="booksSummaryList"></div>
   </section>
 
-  <section class="card sync-card">
-    <div class="card-title" style="margin-bottom: 4px;">
-      <span>☁️ Облачная синхронизация</span>
+  <section class="card">
+    <div class="card-title">☁️ Облачная синхронизация</div>
+    <div class="sync-box">
+      <div class="sync-row">
+        <input type="text" id="syncKeyInput" placeholder="Придумайте секретный код (напр. mira-2026)">
+        <button class="add-btn" id="connectSyncBtn">Подключить</button>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+        <span class="sync-status" id="syncStatusText">Не подключено</span>
+        <button class="today-btn" id="forceSyncBtn">Обновить сейчас</button>
+      </div>
     </div>
-    <div class="sync-row">
-      <input type="text" id="syncKeyInput" placeholder="Придумайте секретный код (напр. mira-2026)">
-      <button class="add-btn" id="connectSyncBtn">Подключить</button>
-    </div>
-    <div class="sync-status" id="syncStatus">
-      <span>Введите код для синхронизации</span>
-      <button class="today-btn" id="forceSyncBtn" style="display: none;">Обновить сейчас</button>
-    </div>
-    <div class="backup-btns" style="margin-top: 6px;">
+
+    <div class="backup-btns">
       <button class="btn-small" id="exportBtn">⬇ Скачать копию (JSON)</button>
       <button class="btn-small" id="importBtn">⬆ Загрузить копию</button>
       <input type="file" id="importFile" accept=".json" style="display: none;">
@@ -855,14 +683,16 @@
   <div class="modal">
     <div class="modal-header">
       <h3>Мои книги и проекты</h3>
-      <button class="modal-close" id="closeBooksBtn">✕</button>
+      <button class="icon-btn" id="closeBooksBtn">✕</button>
     </div>
-    <div class="modal-form">
+
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
       <input type="text" id="newBookName" placeholder="Название новой книги">
-      <input type="number" id="newBookBase" min="0" step="100" placeholder="Уже написано знаков (если есть)" inputmode="numeric">
-      <button class="add-btn" id="createBookBtn" style="padding: 11px;">+ Создать книгу</button>
+      <input type="number" id="newBookBase" placeholder="Уже написано знаков (если есть)" inputmode="numeric">
+      <button class="add-btn" id="createBookBtn" style="padding: 12px;">+ Создать книгу</button>
     </div>
-    <div id="manageBooksList"></div>
+
+    <div id="booksManageList"></div>
   </div>
 </div>
 
@@ -871,9 +701,24 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_LsOIwd-3gDF4BBKd2HZOtw_KDOS9ZDK';
 
   const DAILY_GOAL = 2000;
-  const STORAGE_KEY = 'writer_tracker_v4_cloud';
-  const SYNC_KEY_STORAGE = 'writer_sync_secret_key';
-  const THEME_STORAGE = 'writer_theme';
+  const STATE_KEY = 'writer_studio_state_v3';
+  const SYNC_KEY_STORAGE = 'writer_studio_sync_key';
+  const THEME_STORAGE = 'writer_studio_theme';
+
+  if (localStorage.getItem(THEME_STORAGE) === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  document.getElementById('themeToggleBtn').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem(THEME_STORAGE, 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem(THEME_STORAGE, 'dark');
+    }
+  });
 
   function formatDateKey(date) {
     const y = date.getFullYear();
@@ -888,323 +733,223 @@
   }
 
   function sanitizeState(raw) {
-    const clean = {
-      books: [],
-      selectedBookId: 'default',
-      records: {},
-      updatedAt: (raw && raw.updatedAt) ? raw.updatedAt : 0
-    };
+    const clean = { books: [], days: {}, updatedAt: 0 };
+    if (!raw || typeof raw !== 'object') {
+      clean.books = [{ id: 'book_default', name: 'Основная книга', baseChars: 0 }];
+      return clean;
+    }
 
-    if (raw && Array.isArray(raw.books)) {
+    clean.updatedAt = Number(raw.updatedAt) || 0;
+
+    if (Array.isArray(raw.books)) {
       raw.books.forEach((b, idx) => {
         if (typeof b === 'string' && b.trim()) {
-          clean.books.push({ id: 'book_' + idx + '_' + Date.now(), name: b.trim(), baseChars: 0 });
-        } else if (b && typeof b === 'object' && b.name && String(b.name).trim() && String(b.name) !== 'undefined') {
+          clean.books.push({ id: `book_${idx}`, name: b.trim(), baseChars: 0 });
+        } else if (b && typeof b === 'object' && typeof b.name === 'string' && b.name.trim()) {
           clean.books.push({
-            id: String(b.id || ('book_' + idx + '_' + Date.now())),
-            name: String(b.name).trim(),
-            baseChars: Math.max(0, Number(b.baseChars) || 0)
+            id: b.id || `book_${idx}`,
+            name: b.name.trim(),
+            baseChars: Math.max(0, Math.floor(Number(b.baseChars) || 0))
           });
         }
       });
     }
 
     if (clean.books.length === 0) {
-      clean.books = [{ id: 'default', name: 'Основная книга', baseChars: 0 }];
+      clean.books.push({ id: 'book_default', name: 'Основная книга', baseChars: 0 });
     }
 
-    if (raw && raw.selectedBookId && clean.books.some(b => b.id === raw.selectedBookId)) {
-      clean.selectedBookId = raw.selectedBookId;
-    } else {
-      clean.selectedBookId = clean.books.id;
-    }
-
-    if (raw && raw.records && typeof raw.records === 'object') {
-      Object.entries(raw.records).forEach(([k, rec]) => {
-        if (!rec || typeof rec !== 'object') return;
-        const cleanEntries = {};
-        if (rec.entries && typeof rec.entries === 'object') {
-          Object.entries(rec.entries).forEach(([bId, val]) => {
-            const num = Math.max(0, Number(val) || 0);
-            if (num > 0) cleanEntries[bId] = num;
-          });
-        } else if (typeof rec.chars === 'number' && rec.chars > 0) {
-          cleanEntries[clean.books.id] = rec.chars;
-        }
-        const completed = Boolean(rec.completed || rec.done);
-        const manualOverride = Boolean(rec.manualOverride || rec.manual);
-        if (Object.keys(cleanEntries).length > 0 || completed) {
-          clean.records[k] = { entries: cleanEntries, completed, manualOverride };
-        }
+    if (raw.days && typeof raw.days === 'object') {
+      Object.entries(raw.days).forEach(([k, val]) => {
+        if (!val || typeof val !== 'object') return;
+        const entries = Array.isArray(val.entries)
+          ? val.entries.filter(e => e && typeof e === 'object' && Number(e.chars) > 0)
+          : [];
+        clean.days[k] = {
+          entries,
+          completed: Boolean(val.completed),
+          manualOverride: Boolean(val.manualOverride)
+        };
       });
     }
 
     return clean;
   }
 
+  function hasAnyData(st) {
+    if (!st) return false;
+    const hasCustomBooks = st.books.length > 1 || (st.books[0] && (st.books[0].name !== 'Основная книга' || st.books[0].baseChars > 0));
+    const hasDays = Object.keys(st.days).length > 0;
+    return hasCustomBooks || hasDays;
+  }
+
   function loadInitialState() {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STATE_KEY);
     if (saved) {
       try {
         return sanitizeState(JSON.parse(saved));
-      } catch (e) {}
-    }
-    const v3 = localStorage.getItem('writer_tracker_v3');
-    if (v3) {
-      try {
-        const parsed = sanitizeState(JSON.parse(v3));
-        parsed.updatedAt = Date.now();
-        return parsed;
       } catch (e) {}
     }
     return sanitizeState(null);
   }
 
   let state = loadInitialState();
-  let syncCode = localStorage.getItem(SYNC_KEY_STORAGE) || '';
-  let syncTimeout = null;
-
-  function saveLocalOnly() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-
-  function saveState() {
-    state.updatedAt = Date.now();
-    saveLocalOnly();
-    if (syncCode) {
-      clearTimeout(syncTimeout);
-      syncTimeout = setTimeout(() => pushToCloud(), 800);
-    }
-  }
-
-  function setSyncUI(type, text) {
-    const el = document.getElementById('syncStatus');
-    el.className = 'sync-status ' + (type || '');
-    const btn = document.getElementById('forceSyncBtn');
-    el.firstElementChild.textContent = text;
-    btn.style.display = syncCode ? 'inline-block' : 'none';
-  }
-
-  function getHeaders(extra = {}) {
-    const headers = {
-      'apikey': SUPABASE_ANON_KEY,
-      'Content-Type': 'application/json',
-      ...extra
-    };
-    if (SUPABASE_ANON_KEY.startsWith('eyJ')) {
-      headers['Authorization'] = `Bearer ${SUPABASE_ANON_KEY}`;
-    }
-    return headers;
-  }
-
-  async function pullFromCloud() {
-    if (!syncCode) return;
-    setSyncUI('', 'Синхронизация с облаком...');
-    try {
-      const url = `${SUPABASE_URL}/rest/v1/tracker_sync?sync_key=eq.${encodeURIComponent(syncCode)}&select=payload`;
-      const res = await fetch(url, { headers: getHeaders() });
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`HTTP ${res.status}: ${errText}`);
-      }
-      const rows = await res.json();
-      if (rows.length > 0 && rows.payload) {
-        const cloudState = sanitizeState(rows.payload);
-        if ((cloudState.updatedAt || 0) > (state.updatedAt || 0)) {
-          state = cloudState;
-          saveLocalOnly();
-          renderAll();
-          setSyncUI('ok', `Синхронизировано (загружено в ${new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'})})`);
-        } else {
-          await pushToCloud();
-        }
-      } else {
-        await pushToCloud();
-      }
-    } catch (e) {
-      console.error(e);
-      setSyncUI('err', `Нет связи с облаком (работаем локально)`);
-    }
-  }
-
-  async function pushToCloud() {
-    if (!syncCode) return;
-    try {
-      const url = `${SUPABASE_URL}/rest/v1/tracker_sync`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: getHeaders({ 'Prefer': 'resolution=merge-duplicates' }),
-        body: JSON.stringify({
-          sync_key: syncCode,
-          payload: state,
-          updated_at: new Date().toISOString()
-        })
-      });
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`HTTP ${res.status}: ${errText}`);
-      }
-      setSyncUI('ok', `Синхронизировано (${new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'})})`);
-    } catch (e) {
-      console.error(e);
-      setSyncUI('err', `Не удалось отправить в облако (сохранено в браузере)`);
-    }
-  }
-
-  const savedTheme = localStorage.getItem(THEME_STORAGE) || 'light';
-  if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-
-  document.getElementById('themeBtn').addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem(THEME_STORAGE, next);
-  });
-
   const todayKey = formatDateKey(new Date());
   let selectedDateKey = todayKey;
   let viewDate = new Date();
+  let syncTimer = null;
 
-  const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-  const monthNamesGen = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-
-  function getDayRecord(key) {
-    return state.records[key] || { entries: {}, completed: false, manualOverride: false };
-  }
-
-  function getDayTotalChars(rec) {
-    return Object.values(rec.entries || {}).reduce((sum, val) => sum + (Number(val) || 0), 0);
-  }
-
-  function getBookName(bookId) {
-    const b = state.books.find(item => item.id === bookId);
-    return b ? b.name : 'Удаленная книга';
-  }
-
-  function addCharsToSelectedBook(amount) {
-    const add = Math.floor(Number(amount) || 0);
-    if (add <= 0) return;
-    const bookId = document.getElementById('projectSelect').value;
-    state.selectedBookId = bookId;
-
-    const rec = getDayRecord(selectedDateKey);
-    const entries = { ...(rec.entries || {}) };
-    entries[bookId] = (entries[bookId] || 0) + add;
-
-    const total = Object.values(entries).reduce((a, b) => a + b, 0);
-    let completed = rec.completed;
-    let manualOverride = rec.manualOverride;
-
-    if (total >= DAILY_GOAL) {
-      completed = true;
-      manualOverride = false;
+  function persistLocal(touchTimestamp = true) {
+    if (touchTimestamp) {
+      state.updatedAt = Date.now();
     }
-
-    state.records[selectedDateKey] = { entries, completed, manualOverride };
-    saveState();
-    renderAll();
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
   }
 
-  function removeBookEntryForDay(bookId) {
-    const rec = getDayRecord(selectedDateKey);
-    const entries = { ...(rec.entries || {}) };
-    delete entries[bookId];
-    const total = Object.values(entries).reduce((a, b) => a + b, 0);
-    let completed = rec.completed;
-    if (total < DAILY_GOAL && !rec.manualOverride) completed = false;
+  function saveAndSync() {
+    persistLocal(true);
+    renderAll();
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(() => {
+      pushToCloud();
+    }, 800);
+  }
 
-    if (total === 0 && !completed) {
-      delete state.records[selectedDateKey];
+  function getDayData(key) {
+    return state.days[key] || { entries: [], completed: false, manualOverride: false };
+  }
+
+  function getDayTotalChars(dayObj) {
+    return (dayObj.entries || []).reduce((sum, e) => sum + (Number(e.chars) || 0), 0);
+  }
+
+  function addCharsToDay(charsToAdd) {
+    const val = Math.floor(Number(charsToAdd) || 0);
+    if (val <= 0) return;
+
+    const bookId = document.getElementById('bookSelect').value || state.books[0].id;
+    const dayObj = getDayData(selectedDateKey);
+
+    const existing = dayObj.entries.find(e => e.bookId === bookId);
+    if (existing) {
+      existing.chars += val;
     } else {
-      state.records[selectedDateKey] = { entries, completed, manualOverride: rec.manualOverride };
+      dayObj.entries.push({ bookId, chars: val });
     }
-    saveState();
-    renderAll();
+
+    const total = getDayTotalChars(dayObj);
+    if (total >= DAILY_GOAL) {
+      dayObj.completed = true;
+      dayObj.manualOverride = false;
+    }
+
+    state.days[selectedDateKey] = dayObj;
+    document.getElementById('charInput').value = '';
+    saveAndSync();
+  }
+
+  function removeEntry(bookId) {
+    const dayObj = getDayData(selectedDateKey);
+    dayObj.entries = dayObj.entries.filter(e => e.bookId !== bookId);
+    const total = getDayTotalChars(dayObj);
+
+    if (total < DAILY_GOAL && !dayObj.manualOverride) {
+      dayObj.completed = false;
+    }
+
+    if (dayObj.entries.length === 0 && !dayObj.completed) {
+      delete state.days[selectedDateKey];
+    } else {
+      state.days[selectedDateKey] = dayObj;
+    }
+    saveAndSync();
   }
 
   function toggleComplete() {
-    const rec = getDayRecord(selectedDateKey);
-    const total = getDayTotalChars(rec);
-    const nextCompleted = !rec.completed;
+    const dayObj = getDayData(selectedDateKey);
+    dayObj.completed = !dayObj.completed;
+    dayObj.manualOverride = true;
 
-    if (total === 0 && !nextCompleted) {
-      delete state.records[selectedDateKey];
+    if (dayObj.entries.length === 0 && !dayObj.completed) {
+      delete state.days[selectedDateKey];
     } else {
-      state.records[selectedDateKey] = {
-        entries: rec.entries || {},
-        completed: nextCompleted,
-        manualOverride: true
-      };
+      state.days[selectedDateKey] = dayObj;
     }
-    saveState();
-    renderAll();
+    saveAndSync();
   }
 
-  function renderProjectSelect() {
-    const select = document.getElementById('projectSelect');
+  const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  const monthNamesGen = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+  function renderBookSelect() {
+    const select = document.getElementById('bookSelect');
+    const prev = select.value;
     select.innerHTML = '';
-    state.books.forEach(book => {
+    state.books.forEach(b => {
       const opt = document.createElement('option');
-      opt.value = book.id;
-      opt.textContent = book.name;
-      if (book.id === state.selectedBookId) opt.selected = true;
+      opt.value = b.id;
+      opt.textContent = b.name;
       select.appendChild(opt);
     });
+    if (state.books.some(b => b.id === prev)) {
+      select.value = prev;
+    }
   }
 
   function renderDayEditor() {
-    const rec = getDayRecord(selectedDateKey);
-    const totalChars = getDayTotalChars(rec);
-    const dateObj = parseDateKey(selectedDateKey);
+    const dayObj = getDayData(selectedDateKey);
+    const total = getDayTotalChars(dayObj);
+    const dObj = parseDateKey(selectedDateKey);
 
     const dateLabel = document.getElementById('selectedDateLabel');
     const jumpBtn = document.getElementById('jumpTodayBtn');
     if (selectedDateKey === todayKey) {
-      dateLabel.textContent = `Сегодня, ${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]}`;
+      dateLabel.textContent = `Сегодня, ${dObj.getDate()} ${monthNamesGen[dObj.getMonth()]}`;
       jumpBtn.style.display = 'none';
     } else {
-      dateLabel.textContent = `${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+      dateLabel.textContent = `${dObj.getDate()} ${monthNamesGen[dObj.getMonth()]} ${dObj.getFullYear()}`;
       jumpBtn.style.display = 'inline-block';
     }
 
     const badge = document.getElementById('bonusBadge');
-    if (totalChars >= DAILY_GOAL * 2) badge.textContent = '🔥 Двойная норма!';
-    else if (totalChars >= DAILY_GOAL) badge.textContent = '✨ Норма выполнена';
-    else if (totalChars >= 1700) badge.textContent = `Осталось ${DAILY_GOAL - totalChars} зн.!`;
+    if (total >= DAILY_GOAL * 2) badge.textContent = '🔥 Двойная норма!';
+    else if (total >= DAILY_GOAL) badge.textContent = '✨ Норма выполнена';
+    else if (total >= 1700) badge.textContent = `Осталось ${DAILY_GOAL - total} зн.`;
     else badge.textContent = '';
 
-    const breakdown = document.getElementById('dayBreakdown');
-    breakdown.innerHTML = '';
-    Object.entries(rec.entries || {}).forEach(([bId, val]) => {
-      if (val <= 0) return;
+    const list = document.getElementById('dayEntriesList');
+    list.innerHTML = '';
+    dayObj.entries.forEach(entry => {
+      const book = state.books.find(b => b.id === entry.bookId);
+      const bookName = book ? book.name : 'Удаленная книга';
       const chip = document.createElement('div');
       chip.className = 'entry-chip';
-      chip.innerHTML = `<span>${getBookName(bId)}: <b>${val.toLocaleString('ru-RU')}</b></span>`;
+      chip.innerHTML = `<span><strong>${bookName}</strong>: ${entry.chars.toLocaleString('ru-RU')} зн.</span>`;
       const del = document.createElement('button');
+      del.className = 'entry-chip-del';
       del.textContent = '×';
-      del.onclick = () => removeBookEntryForDay(bId);
+      del.onclick = () => removeEntry(entry.bookId);
       chip.appendChild(del);
-      breakdown.appendChild(chip);
+      list.appendChild(chip);
     });
 
-    const pct = Math.min(100, Math.round((totalChars / DAILY_GOAL) * 100));
-    const dayWord = selectedDateKey === todayKey ? 'Сегодня' : 'За день';
-    document.getElementById('progressText').textContent = `${dayWord}: ${totalChars.toLocaleString('ru-RU')} / ${DAILY_GOAL.toLocaleString('ru-RU')} зн.`;
-    document.getElementById('progressPercent').textContent = `${Math.round((totalChars / DAILY_GOAL) * 100)}%`;
+    const pct = Math.min(100, Math.round((total / DAILY_GOAL) * 100));
+    document.getElementById('progressText').textContent = `Сегодня: ${total.toLocaleString('ru-RU')} / ${DAILY_GOAL.toLocaleString('ru-RU')} зн.`;
+    document.getElementById('progressPercent').textContent = `${Math.round((total / DAILY_GOAL) * 100)}%`;
     const fill = document.getElementById('progressFill');
     fill.style.width = `${pct}%`;
-    fill.classList.toggle('completed', rec.completed || totalChars >= DAILY_GOAL);
+    fill.classList.toggle('completed', dayObj.completed || total >= DAILY_GOAL);
 
-    const cBtn = document.getElementById('completeBtn');
-    const cText = document.getElementById('completeBtnText');
+    const btn = document.getElementById('completeBtn');
+    const btnText = document.getElementById('completeBtnText');
     const hint = document.getElementById('statusHint');
-    if (rec.completed) {
-      cBtn.classList.add('is-done');
-      cText.textContent = 'Выполнено';
-      hint.textContent = totalChars >= DAILY_GOAL ? 'Норма выполнена — засчитано автоматически' : 'День закрыт вручную';
+    if (dayObj.completed) {
+      btn.classList.add('is-done');
+      btnText.textContent = 'Выполнено';
+      hint.textContent = total >= DAILY_GOAL ? 'Норма выполнена — засчитано автоматически' : 'Закрыто вручную';
     } else {
-      cBtn.classList.remove('is-done');
-      cText.textContent = 'Выполнил';
+      btn.classList.remove('is-done');
+      btnText.textContent = 'Выполнил';
       hint.textContent = 'При сумме 2000+ знаков за день птичка ставится сама';
     }
   }
@@ -1216,10 +961,10 @@
     const grid = document.getElementById('calendarGrid');
     grid.innerHTML = '';
 
-    ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(d => {
+    ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(w => {
       const el = document.createElement('div');
       el.className = 'cal-weekday';
-      el.textContent = d;
+      el.textContent = w;
       grid.appendChild(el);
     });
 
@@ -1233,294 +978,369 @@
       grid.appendChild(empty);
     }
 
-    for (let day = 1; day <= daysInMonth; day++) {
-      const key = formatDateKey(new Date(year, month, day));
-      const rec = getDayRecord(key);
-      const total = getDayTotalChars(rec);
+    for (let d = 1; d <= daysInMonth; d++) {
+      const key = formatDateKey(new Date(year, month, d));
+      const dayObj = getDayData(key);
+      const total = getDayTotalChars(dayObj);
 
       const cell = document.createElement('div');
       cell.className = 'cal-day';
       if (key === selectedDateKey) cell.classList.add('selected');
-      if (rec.completed) cell.classList.add('done');
+      if (dayObj.completed) cell.classList.add('done');
       else if (total > 0) cell.classList.add('partial');
 
-      cell.innerHTML = `<span class="cal-num">${day}</span>`;
-      if (rec.completed) {
-        cell.innerHTML += `<span class="cal-status">${total >= DAILY_GOAL * 2 ? '✓🔥' : '✓'}</span>`;
-      }
-      if (total > 0) {
-        const shortVal = total >= 1000 ? `${(total / 1000).toFixed(1).replace('.0', '')}к` : total;
-        cell.innerHTML += `<span class="cal-chars">${shortVal}</span>`;
+      const num = document.createElement('span');
+      num.className = 'cal-num';
+      num.textContent = d;
+      cell.appendChild(num);
+
+      if (dayObj.completed) {
+        const st = document.createElement('span');
+        st.className = 'cal-status';
+        st.textContent = total >= DAILY_GOAL * 2 ? '✓🔥' : '✓';
+        cell.appendChild(st);
       }
 
-      cell.addEventListener('click', () => {
+      if (total > 0) {
+        const ch = document.createElement('span');
+        ch.className = 'cal-chars';
+        ch.textContent = total >= 1000 ? `${(total / 1000).toFixed(1).replace('.0', '')}к` : total;
+        cell.appendChild(ch);
+      }
+
+      cell.onclick = () => {
         selectedDateKey = key;
         renderAll();
-      });
+      };
       grid.appendChild(cell);
     }
   }
 
   function renderAnalytics() {
-    let totalTracked = 0;
+    let totalChars = 0;
     let daysDone = 0;
     let monthDone = 0;
     let activeDays = 0;
     let bestDay = 0;
-    const bookTrackedTotals = {};
+    const bookTrackerTotals = {};
 
     const monthPrefix = `${viewDate.getFullYear()}-${String(viewDate.getMonth() + 1).padStart(2, '0')}`;
 
-    Object.entries(state.records).forEach(([key, rec]) => {
-      const daySum = getDayTotalChars(rec);
-      totalTracked += daySum;
+    Object.entries(state.days).forEach(([key, dayObj]) => {
+      const daySum = getDayTotalChars(dayObj);
+      totalChars += daySum;
       if (daySum > 0) activeDays++;
       if (daySum > bestDay) bestDay = daySum;
-      if (rec.completed) {
+      if (dayObj.completed) {
         daysDone++;
         if (key.startsWith(monthPrefix)) monthDone++;
       }
-      Object.entries(rec.entries || {}).forEach(([bId, val]) => {
-        bookTrackedTotals[bId] = (bookTrackedTotals[bId] || 0) + (Number(val) || 0);
+      (dayObj.entries || []).forEach(e => {
+        bookTrackerTotals[e.bookId] = (bookTrackerTotals[e.bookId] || 0) + (Number(e.chars) || 0);
       });
     });
 
-    const completedDates = Object.keys(state.records).filter(k => state.records[k].completed).sort();
-    let bestStreak = 0, tempStreak = 0, prevDate = null;
-    completedDates.forEach(dStr => {
-      const curr = parseDateKey(dStr);
-      if (prevDate && Math.round((curr - prevDate) / 86400000) === 1) tempStreak++;
-      else tempStreak = 1;
-      if (tempStreak > bestStreak) bestStreak = tempStreak;
-      prevDate = curr;
+    const completedDates = Object.keys(state.days).filter(k => state.days[k].completed).sort();
+    let bestStreak = 0, temp = 0, prev = null;
+    completedDates.forEach(ds => {
+      const curr = parseDateKey(ds);
+      if (prev && Math.round((curr - prev) / 86400000) === 1) temp++;
+      else temp = 1;
+      if (temp > bestStreak) bestStreak = temp;
+      prev = curr;
     });
 
-    let currentStreak = 0;
-    let checkDate = new Date();
-    if (!getDayRecord(formatDateKey(checkDate)).completed) checkDate.setDate(checkDate.getDate() - 1);
-    while (getDayRecord(formatDateKey(checkDate)).completed) {
-      currentStreak++;
-      checkDate.setDate(checkDate.getDate() - 1);
+    let curStreak = 0;
+    let check = new Date();
+    if (!getDayData(formatDateKey(check)).completed) check.setDate(check.getDate() - 1);
+    while (getDayData(formatDateKey(check)).completed) {
+      curStreak++;
+      check.setDate(check.getDate() - 1);
     }
 
-    const avg = activeDays > 0 ? Math.round(totalTracked / activeDays) : 0;
-    const pages = (totalTracked / 2000).toFixed(1).replace('.0', '');
-
-    let allBooksSum = 0;
+    let totalBaseChars = 0;
     state.books.forEach(b => {
-      const base = Number(b.baseChars) || 0;
-      const tracked = bookTrackedTotals[b.id] || 0;
-      allBooksSum += (base + tracked);
+      totalBaseChars += (Number(b.baseChars) || 0);
     });
-    const allBooksPages = (allBooksSum / 2000).toFixed(1).replace('.0', '');
+    const grandTotalChars = totalBaseChars + totalChars;
+    const grandPages = (grandTotalChars / 2000).toFixed(1).replace('.0', '');
 
-    document.getElementById('statAllBooksChars').textContent = `${allBooksSum.toLocaleString('ru-RU')} зн.`;
-    document.getElementById('statAllBooksPages').textContent = `≈ ${allBooksPages} стр. А4`;
+    const avg = activeDays > 0 ? Math.round(totalChars / activeDays) : 0;
+    const pages = (totalChars / 2000).toFixed(1).replace('.0', '');
 
-    document.getElementById('statTotalChars').textContent = totalTracked.toLocaleString('ru-RU');
+    document.getElementById('statGrandTotal').textContent = `${grandTotalChars.toLocaleString('ru-RU')} зн.`;
+    document.getElementById('statGrandPages').textContent = `≈ ${grandPages} стр. А4`;
+
+    document.getElementById('statTotalChars').textContent = totalChars.toLocaleString('ru-RU');
     document.getElementById('statPages').textContent = `≈ ${pages} стр. А4`;
     document.getElementById('statDaysDone').textContent = daysDone;
     document.getElementById('statMonthDone').textContent = `За месяц: ${monthDone}`;
-    document.getElementById('statStreak').textContent = `${currentStreak} дн.`;
+    document.getElementById('statStreak').textContent = `${curStreak} дн.`;
     document.getElementById('statBestStreak').textContent = `Рекорд: ${bestStreak} дн.`;
     document.getElementById('statAvgChars').textContent = avg.toLocaleString('ru-RU');
     document.getElementById('statBestDay').textContent = `Максимум: ${bestDay.toLocaleString('ru-RU')}`;
 
-    const list = document.getElementById('bookStatList');
-    list.innerHTML = '';
+    const summaryEl = document.getElementById('booksSummaryList');
+    summaryEl.innerHTML = '';
     state.books.forEach(b => {
+      const inTracker = bookTrackerTotals[b.id] || 0;
       const base = Number(b.baseChars) || 0;
-      const tracked = bookTrackedTotals[b.id] || 0;
-      const grandTotal = base + tracked;
-      const bPages = (grandTotal / 2000).toFixed(1).replace('.0', '');
+      const grandTotal = base + inTracker;
+      const bookPages = (grandTotal / 2000).toFixed(1).replace('.0', '');
 
-      const item = document.createElement('div');
-      item.className = 'book-stat-item';
-      item.innerHTML = `
+      const row = document.createElement('div');
+      row.className = 'book-stat-row';
+      row.innerHTML = `
         <div>
           <div class="book-stat-name">${b.name}</div>
-          <div class="book-stat-detail">Было: ${base.toLocaleString('ru-RU')} + в трекере: ${tracked.toLocaleString('ru-RU')}</div>
+          <div class="book-stat-meta">Было: ${base.toLocaleString('ru-RU')} + в трекере: ${inTracker.toLocaleString('ru-RU')}</div>
         </div>
         <div class="book-stat-total">
-          <div class="book-stat-chars">${grandTotal.toLocaleString('ru-RU')} зн.</div>
-          <div class="book-stat-pages">≈ ${bPages} стр. А4</div>
+          <div>${grandTotal.toLocaleString('ru-RU')} зн.</div>
+          <div class="book-stat-meta">≈ ${bookPages} стр. А4</div>
         </div>
       `;
+      summaryEl.appendChild(row);
+    });
+  }
+
+  function renderBooksManager() {
+    const list = document.getElementById('booksManageList');
+    list.innerHTML = '';
+    state.books.forEach(b => {
+      const item = document.createElement('div');
+      item.className = 'book-manage-item';
+
+      const top = document.createElement('div');
+      top.className = 'book-manage-top';
+      const title = document.createElement('strong');
+      title.textContent = b.name;
+      top.appendChild(title);
+
+      if (state.books.length > 1) {
+        const del = document.createElement('button');
+        del.className = 'today-btn';
+        del.style.color = '#ef4444';
+        del.textContent = 'Удалить';
+        del.onclick = () => {
+          if (confirm(`Удалить книгу «${b.name}» из списка?`)) {
+            state.books = state.books.filter(x => x.id !== b.id);
+            saveAndSync();
+            renderBooksManager();
+          }
+        };
+        top.appendChild(del);
+      }
+
+      const baseRow = document.createElement('div');
+      baseRow.style.display = 'flex';
+      baseRow.style.alignItems = 'center';
+      baseRow.style.gap = '8px';
+      baseRow.innerHTML = `<span style="font-size: 0.8rem; color: var(--muted); white-space: nowrap;">Уже написано:</span>`;
+
+      const baseInput = document.createElement('input');
+      baseInput.type = 'number';
+      baseInput.value = b.baseChars || 0;
+      baseInput.style.padding = '6px 10px';
+      baseInput.onchange = () => {
+        b.baseChars = Math.max(0, Math.floor(Number(baseInput.value) || 0));
+        saveAndSync();
+      };
+      baseRow.appendChild(baseInput);
+
+      item.appendChild(top);
+      item.appendChild(baseRow);
       list.appendChild(item);
     });
   }
 
-  function renderManageBooks() {
-    const list = document.getElementById('manageBooksList');
-    list.innerHTML = '';
-    state.books.forEach(b => {
-      const wrap = document.createElement('div');
-      wrap.className = 'manage-book-item';
-
-      const top = document.createElement('div');
-      top.className = 'manage-book-top';
-      top.innerHTML = `<span>${b.name}</span>`;
-
-      if (state.books.length > 1) {
-        const delBtn = document.createElement('button');
-        delBtn.className = 'today-btn';
-        delBtn.style.color = '#ef4444';
-        delBtn.textContent = 'Удалить';
-        delBtn.onclick = () => {
-          state.books = state.books.filter(item => item.id !== b.id);
-          if (state.selectedBookId === b.id) state.selectedBookId = state.books.id;
-          saveState();
-          renderManageBooks();
-          renderAll();
-        };
-        top.appendChild(delBtn);
-      }
-
-      const baseRow = document.createElement('div');
-      baseRow.className = 'manage-book-base';
-      baseRow.innerHTML = `<span>Уже написано:</span>`;
-      const baseInput = document.createElement('input');
-      baseInput.type = 'number';
-      baseInput.min = '0';
-      baseInput.step = '100';
-      baseInput.value = b.baseChars || 0;
-      baseInput.onchange = (e) => {
-        b.baseChars = Math.max(0, Math.floor(Number(e.target.value) || 0));
-        saveState();
-        renderAnalytics();
-      };
-      baseRow.appendChild(baseInput);
-
-      wrap.appendChild(top);
-      wrap.appendChild(baseRow);
-      list.appendChild(wrap);
-    });
-  }
-
   function renderAll() {
-    renderProjectSelect();
+    renderBookSelect();
     renderDayEditor();
     renderCalendar();
     renderAnalytics();
   }
 
-  document.getElementById('projectSelect').addEventListener('change', (e) => {
-    state.selectedBookId = e.target.value;
-    saveState();
-  });
-
-  document.getElementById('addCharsBtn').addEventListener('click', () => {
-    const input = document.getElementById('charInput');
-    addCharsToSelectedBook(input.value);
-    input.value = '';
-  });
-
-  document.getElementById('charInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      addCharsToSelectedBook(e.target.value);
-      e.target.value = '';
-    }
+  document.getElementById('addEntryBtn').onclick = () => addCharsToDay(document.getElementById('charInput').value);
+  document.getElementById('charInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addCharsToDay(e.target.value);
   });
 
   document.querySelectorAll('.quick-btn[data-add]').forEach(btn => {
-    btn.addEventListener('click', () => addCharsToSelectedBook(btn.dataset.add));
+    btn.onclick = () => addCharsToDay(btn.dataset.add);
   });
 
-  document.getElementById('clearDayBtn').addEventListener('click', () => {
-    delete state.records[selectedDateKey];
-    saveState();
-    renderAll();
-  });
+  document.getElementById('clearDayBtn').onclick = () => {
+    delete state.days[selectedDateKey];
+    saveAndSync();
+  };
 
-  document.getElementById('completeBtn').addEventListener('click', toggleComplete);
-
-  document.getElementById('jumpTodayBtn').addEventListener('click', () => {
+  document.getElementById('completeBtn').onclick = toggleComplete;
+  document.getElementById('jumpTodayBtn').onclick = () => {
     selectedDateKey = todayKey;
     viewDate = new Date();
     renderAll();
-  });
+  };
 
-  document.getElementById('prevMonthBtn').addEventListener('click', () => {
+  document.getElementById('prevMonthBtn').onclick = () => {
     viewDate.setMonth(viewDate.getMonth() - 1);
     renderCalendar();
     renderAnalytics();
-  });
+  };
 
-  document.getElementById('nextMonthBtn').addEventListener('click', () => {
+  document.getElementById('nextMonthBtn').onclick = () => {
     viewDate.setMonth(viewDate.getMonth() + 1);
     renderCalendar();
     renderAnalytics();
-  });
+  };
 
   const modal = document.getElementById('booksModal');
-  document.getElementById('openBooksBtn').addEventListener('click', () => {
-    renderManageBooks();
+  document.getElementById('openBooksBtn').onclick = () => {
+    renderBooksManager();
     modal.classList.add('open');
-  });
-  document.getElementById('closeBooksBtn').addEventListener('click', () => modal.classList.remove('open'));
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+  };
+  document.getElementById('closeBooksBtn').onclick = () => modal.classList.remove('open');
 
-  document.getElementById('createBookBtn').addEventListener('click', () => {
-    const nameInput = document.getElementById('newBookName');
-    const baseInput = document.getElementById('newBookBase');
-    const name = nameInput.value.trim();
+  document.getElementById('createBookBtn').onclick = () => {
+    const name = document.getElementById('newBookName').value.trim();
+    const base = Math.max(0, Math.floor(Number(document.getElementById('newBookBase').value) || 0));
     if (!name) return;
     const id = 'book_' + Date.now();
-    state.books.push({ id, name, baseChars: Math.max(0, Math.floor(Number(baseInput.value) || 0)) });
-    state.selectedBookId = id;
-    nameInput.value = '';
-    baseInput.value = '';
-    saveState();
-    renderManageBooks();
-    renderAll();
-  });
+    state.books.push({ id, name, baseChars: base });
+    document.getElementById('newBookName').value = '';
+    document.getElementById('newBookBase').value = '';
+    saveAndSync();
+    document.getElementById('bookSelect').value = id;
+    renderBooksManager();
+  };
 
-  const syncInput = document.getElementById('syncKeyInput');
-  if (syncCode) syncInput.value = syncCode;
-
-  document.getElementById('connectSyncBtn').addEventListener('click', () => {
-    const val = syncInput.value.trim();
-    if (!val) return;
-    syncCode = val;
-    localStorage.setItem(SYNC_KEY_STORAGE, syncCode);
-    pullFromCloud();
-  });
-
-  document.getElementById('forceSyncBtn').addEventListener('click', () => pullFromCloud());
-
-  document.getElementById('exportBtn').addEventListener('click', () => {
+  document.getElementById('exportBtn').onclick = () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
+    a.href = URL.createObjectURL(blob);
     a.download = `writer-backup-${todayKey}.json`;
     a.click();
-    URL.revokeObjectURL(url);
-  });
+  };
 
   const importFile = document.getElementById('importFile');
-  document.getElementById('importBtn').addEventListener('click', () => importFile.click());
-  importFile.addEventListener('change', (e) => {
-    const file = e.target.files;
+  document.getElementById('importBtn').onclick = () => importFile.click();
+  importFile.onchange = e => {
+    const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (ev) => {
+    reader.onload = ev => {
       try {
-        const parsed = sanitizeState(JSON.parse(ev.target.result));
-        parsed.updatedAt = Date.now();
-        state = parsed;
-        saveState();
-        renderAll();
-        alert('Резервная копия загружена!');
+        const parsed = JSON.parse(ev.target.result);
+        state = sanitizeState(parsed);
+        saveAndSync();
+        alert('Копия успешно загружена!');
       } catch {
         alert('Ошибка чтения файла.');
       }
     };
     reader.readAsText(file);
-  });
+  };
+
+  const syncKeyInput = document.getElementById('syncKeyInput');
+  const syncStatusText = document.getElementById('syncStatusText');
+  syncKeyInput.value = localStorage.getItem(SYNC_KEY_STORAGE) || '';
+
+  function setSyncStatus(msg, type = '') {
+    syncStatusText.textContent = msg;
+    syncStatusText.className = 'sync-status ' + type;
+  }
+
+  async function pullFromCloud(forceUploadIfMissing = false) {
+    const key = syncKeyInput.value.trim();
+    if (!key) return;
+
+    setSyncStatus('Проверка облака...');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/tracker_sync?sync_key=eq.${encodeURIComponent(key)}&select=payload`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        setSyncStatus(`Ошибка связи: HTTP ${res.status}`, 'err');
+        return;
+      }
+      const rows = await res.json();
+      if (rows.length > 0 && rows[0].payload) {
+        const remote = sanitizeState(rows[0].payload);
+        if (!hasAnyData(state) && hasAnyData(remote)) {
+          state = remote;
+          persistLocal(false);
+          renderAll();
+          setSyncStatus(`Загружено из облака (${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})`, 'ok');
+        } else if (remote.updatedAt > (state.updatedAt || 0) && hasAnyData(remote)) {
+          state = remote;
+          persistLocal(false);
+          renderAll();
+          setSyncStatus(`Синхронизировано (${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})`, 'ok');
+        } else if (hasAnyData(state)) {
+          await pushToCloud();
+        } else {
+          setSyncStatus('Облако подключено (пока пусто)', 'ok');
+        }
+      } else if (forceUploadIfMissing && hasAnyData(state)) {
+        await pushToCloud();
+      } else {
+        setSyncStatus('Облако подключено (записей пока нет)', 'ok');
+      }
+    } catch (err) {
+      setSyncStatus('Нет связи с облаком (проверьте VPN)', 'err');
+    }
+  }
+
+  async function pushToCloud() {
+    const key = syncKeyInput.value.trim();
+    if (!key) return;
+
+    if (!hasAnyData(state)) {
+      setSyncStatus('Защита: пустые данные не отправлены в облако', 'ok');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/tracker_sync`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify({
+          sync_key: key,
+          payload: state,
+          updated_at: new Date().toISOString()
+        })
+      });
+      if (res.ok) {
+        setSyncStatus(`Сохранено в облако (${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})`, 'ok');
+      } else {
+        setSyncStatus(`Ошибка сохранения: HTTP ${res.status}`, 'err');
+      }
+    } catch (err) {
+      setSyncStatus('Ошибка сети при сохранении (проверьте VPN)', 'err');
+    }
+  }
+
+  document.getElementById('connectSyncBtn').onclick = () => {
+    const key = syncKeyInput.value.trim();
+    if (!key) return alert('Введите придуманный код синхронизации');
+    localStorage.setItem(SYNC_KEY_STORAGE, key);
+    pullFromCloud(true);
+  };
+
+  document.getElementById('forceSyncBtn').onclick = () => pullFromCloud(true);
 
   renderAll();
-  if (syncCode) pullFromCloud();
+  if (syncKeyInput.value.trim()) {
+    pullFromCloud(false);
+  }
 </script>
 </body>
 </html>
