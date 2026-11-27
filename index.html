@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Трекер писателя — 2000 знаков</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --card-sub: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #4f46e5;
+      --primary-soft: #eef2ff;
+      --success: #10b981;
+      --success-bg: #d1fae5;
+      --success-text: #065f46;
+      --danger: #ef4444;
+      --border: #e2e8f0;
+      --shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1120;
+      --card: #1e293b;
+      --card-sub: #0f172a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-soft: rgba(99, 102, 241, 0.16);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.18);
+      --success-text: #6ee7b7;
+      --danger: #f87171;
+      --border: #334155;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding: 14px 12px 60px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 2px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .goal-pill {
+      background: var(--primary-soft);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: var(--shadow);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.97);
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+
+    .date-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .today-jump {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .badge-status {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d97706;
+    }
+
+    .project-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    select {
+      flex: 1;
+      background: var(--card-sub);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 16px;
+      font-weight: 600;
+      outline: none;
+      min-width: 0;
+    }
+
+    select:focus {
+      border-color: var(--primary);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      background: var(--card-sub);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 16px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    input[type="number"]:focus, input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    #charInput {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .q-btn {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 4px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .q-btn:active {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .q-btn.reset {
+      color: var(--danger);
+    }
+
+    .day-breakdown {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 9px;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip b {
+      color: var(--primary);
+    }
+
+    .chip button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0 2px;
+      font-size: 0.9rem;
+    }
+
+    .progress-box {
+      margin-bottom: 16px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .track {
+      height: 14px;
+      background: var(--card-sub);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.25s ease, background-color 0.25s ease;
+    }
+
+    .fill.done {
+      background: var(--success);
+    }
+
+    .ticks {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      pointer-events: none;
+    }
+
+    .ticks div {
+      flex: 1;
+      border-right: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .ticks div:last-child {
+      border-right: none;
+    }
+
+    .done-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--card-sub);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .done-btn.active {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .check-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .done-btn.active .check-circle {
+      background: #ffffff;
+      color: var(--success);
+      border-color: #ffffff;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* Календарь */
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cal-arrow {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .cal-wd {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      padding-bottom: 4px;
+    }
+
+    .cal-cell {
+      aspect-ratio: 1 / 1.08;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--card-sub);
+      padding: 3px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      min-height: 46px;
+      overflow: hidden;
+    }
+
+    .cal-cell.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+
+    .cal-cell.selected {
+      border: 2px solid var(--primary);
+    }
+
+    .cal-cell.done {
+      background: var(--success-bg);
+      border-color: var(--success);
+    }
+
+    .cal-cell.partial {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .cal-d {
+      font-size: 0.75rem;
+      font-weight: 700;
+      align-self: flex-start;
+      padding-left: 2px;
+      line-height: 1;
+    }
+
+    .cal-mark {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--success);
+      line-height: 1;
+    }
+
+    .cal-val {
+      font-size: 0.62rem;
+      color: var(--muted);
+      line-height: 1;
+    }
+
+    .cal-cell.done .cal-val {
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    /* Статистика */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .stat-num {
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .stat-sub {
+      font-size: 0.7rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .books-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .book-stat-row {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .book-stat-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .book-stat-meta {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .book-stat-total {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .book-stat-total strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .book-stat-total span {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Модальное окно книг */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      padding: 12px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    @media (min-width: 540px) {
+      .modal-backdrop {
+        align-items: center;
+      }
+    }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .modal-head h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .close-modal {
+      background: var(--card-sub);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .new-book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--card-sub);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 11px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .manage-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .manage-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px;
+      background: var(--card-sub);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .manage-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .manage-base-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .manage-base-row input {
+      width: 130px;
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+
+    .del-book-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--danger);
+      padding: 4px 8px;
+      border-radius: 7px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .footer-tools {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tool-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">
+      <h1>Трекер</h1>
+      <span class="goal-pill">2 000 зн.</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="openBooksBtn">📚 Книги</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Сменить тему">🌓</button>
+    </div>
+  </header>
+
+  <!-- Карточка дня -->
+  <section class="card">
+    <div class="card-top">
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <span class="date-title" id="dateTitle">Сегодня</span>
+        <button class="today-jump" id="todayJumpBtn" style="display:none;">В сегодня</button>
+      </div>
+      <span class="badge-status" id="statusBadge"></span>
+    </div>
+
+    <div class="project-row">
+      <select id="projectSelect"></select>
+    </div>
+
+    <div class="input-row">
+      <input type="number" id="charInput" min="0" step="50" placeholder="0" inputmode="numeric">
+    </div>
+
+    <div class="quick-grid">
+      <button class="q-btn" data-add="250">+250</button>
+      <button class="q-btn" data-add="500">+500</button>
+      <button class="q-btn" data-add="1000">+1000</button>
+      <button class="q-btn" data-add="2000">+2000</button>
+      <button class="q-btn reset" id="resetProjectDayBtn">Сброс</button>
+    </div>
+
+    <div class="day-breakdown" id="dayBreakdown"></div>
+
+    <div class="progress-box">
+      <div class="progress-meta">
+        <span id="progressLabel">0 / 2 000 знаков</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="track">
+        <div class="fill" id="progressFill"></div>
+        <div class="ticks">
+          <div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="done-btn" id="completeBtn">
+      <span class="check-circle">✓</span>
+      <span id="completeText">Выполнил</span>
+    </button>
+    <div class="hint" id="hintLabel">При сумме 2000+ знаков за день птичка ставится сама</div>
+  </section>
+
+  <!-- Календарь -->
+  <section class="card">
+    <div class="card-top">
+      <span class="date-title" id="monthLabel">Месяц</span>
+      <div class="cal-nav">
+        <button class="cal-arrow" id="prevMonthBtn">←</button>
+        <button class="cal-arrow" id="nextMonthBtn">→</button>
+      </div>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+  </section>
+
+  <!-- Аналитика -->
+  <section class="card">
+    <div class="card-top">
+      <span class="date-title">Сквозная статистика</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num" id="stTotal">0</div>
+        <div class="stat-lbl">Написано в трекере</div>
+        <div class="stat-sub" id="stPages">≈ 0 стр. А4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stDoneDays">0</div>
+        <div class="stat-lbl">Дней с птичкой</div>
+        <div class="stat-sub" id="stMonthDays">За месяц: 0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stStreak">0 дн.</div>
+        <div class="stat-lbl">Текущая серия</div>
+        <div class="stat-sub" id="stBestStreak">Рекорд: 0 дн.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stAvg">0</div>
+        <div class="stat-lbl">Среднее в день</div>
+        <div class="stat-sub" id="stMax">Максимум: 0</div>
+      </div>
+    </div>
+
+    <div class="card-top" style="margin-top: 6px; margin-bottom: 10px;">
+      <span style="font-weight:700; font-size:0.95rem;">Объем по книгам (всего)</span>
+    </div>
+    <div class="books-summary" id="booksSummary"></div>
+  </section>
+
+  <div class="footer-tools">
+    <button class="tool-btn" id="exportBtn">⬇ Скачать копию (JSON)</button>
+    <button class="tool-btn" id="importBtn">⬆ Загрузить копию</button>
+    <input type="file" id="importInput" accept=".json" style="display:none;">
+  </div>
+</div>
+
+<!-- Модальное окно управления книгами -->
+<div class="modal-backdrop" id="booksModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Мои книги и проекты</h2>
+      <button class="close-modal" id="closeModalBtn">✕</button>
+    </div>
+
+    <div class="new-book-form">
+      <input type="text" id="newBookTitle" placeholder="Название новой книги...">
+      <input type="number" id="newBookBase" min="0" step="1000" placeholder="Уже написано знаков (если есть)" inputmode="numeric">
+      <button class="btn-primary" id="addBookBtn">+ Добавить книгу</button>
+    </div>
+
+    <div class="manage-list" id="manageBooksList"></div>
+  </div>
+</div>
+
+<script>
+  const DAILY_GOAL = 2000;
+  const KEY_V3 = 'writer_studio_v3';
+  const KEY_THEME = 'writer_theme_v3';
+
+  function formatKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+
+  function parseKey(k) {
+    const [y, m, d] = k.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  // Инициализация и миграция из старых версий
+  function loadState() {
+    const saved = localStorage.getItem(KEY_V3);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && Array.isArray(parsed.projects) && typeof parsed.days === 'object') {
+          return parsed;
+        }
+      } catch (e) {}
+    }
+
+    const defaultState = {
+      projects: [{ id: 'p_main', name: 'Основная книга', baseChars: 0 }],
+      activeProjectId: 'p_main',
+      days: {}
+    };
+
+    // Попытка подхватить данные из самой первой версии
+    const oldV1 = localStorage.getItem('writer_tracker_2k_v1') || localStorage.getItem('writer_tracker_data_v1');
+    if (oldV1) {
+      try {
+        const oldData = JSON.parse(oldV1);
+        Object.entries(oldData).forEach(([k, v]) => {
+          const c = Number(v.chars) || 0;
+          const done = Boolean(v.completed || v.done);
+          if (c > 0 || done) {
+            defaultState.days[k] = {
+              byProject: c > 0 ? { p_main: c } : {},
+              completed: done,
+              manualOverride: Boolean(v.manualOverride || v.manual)
+            };
+          }
+        });
+      } catch (e) {}
+    }
+
+    return defaultState;
+  }
+
+  let state = loadState();
+  function saveState() {
+    localStorage.setItem(KEY_V3, JSON.stringify(state));
+  }
+
+  // Тема
+  const savedTheme = localStorage.getItem(KEY_THEME) || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(KEY_THEME, next);
+  });
+
+  const todayKey = formatKey(new Date());
+  let selectedDate = todayKey;
+  let viewDate = new Date();
+
+  const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  const monthsGen = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+  function getDayObj(key) {
+    return state.days[key] || { byProject: {}, completed: false, manualOverride: false };
+  }
+
+  function getDayTotal(dayObj) {
+    return Object.values(dayObj.byProject || {}).reduce((acc, n) => acc + (Number(n) || 0), 0);
+  }
+
+  function setProjectCharsForDay(dateKey, projectId, rawVal) {
+    const val = Math.max(0, Math.floor(Number(rawVal) || 0));
+    const day = JSON.parse(JSON.stringify(getDayObj(dateKey)));
+
+    if (val > 0) {
+      day.byProject[projectId] = val;
+    } else {
+      delete day.byProject[projectId];
+    }
+
+    const total = getDayTotal(day);
+    if (total >= DAILY_GOAL) {
+      day.completed = true;
+      day.manualOverride = false;
+    } else if (!day.manualOverride) {
+      day.completed = false;
+    }
+
+    if (total === 0 && !day.completed) {
+      delete state.days[dateKey];
+    } else {
+      state.days[dateKey] = day;
+    }
+
+    saveState();
+    renderAll();
+  }
+
+  function toggleDayComplete() {
+    const day = JSON.parse(JSON.stringify(getDayObj(selectedDate)));
+    const next = !day.completed;
+    const total = getDayTotal(day);
+
+    if (total === 0 && !next) {
+      delete state.days[selectedDate];
+    } else {
+      day.completed = next;
+      day.manualOverride = true;
+      state.days[selectedDate] = day;
+    }
+
+    saveState();
+    renderAll();
+  }
+
+  // Рендер селекта книг
+  const projectSelect = document.getElementById('projectSelect');
+  function renderProjectSelect() {
+    if (!state.projects.some(p => p.id === state.activeProjectId) && state.projects.length > 0) {
+      state.activeProjectId = state.projects[0].id;
+    }
+    projectSelect.innerHTML = '';
+    state.projects.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.name;
+      if (p.id === state.activeProjectId) opt.selected = true;
+      projectSelect.appendChild(opt);
+    });
+  }
+
+  projectSelect.addEventListener('change', () => {
+    state.activeProjectId = projectSelect.value;
+    saveState();
+    const day = getDayObj(selectedDate);
+    document.getElementById('charInput').value = day.byProject[state.activeProjectId] || '';
+    renderDay();
+  });
+
+  // Рендер карточки дня
+  const charInput = document.getElementById('charInput');
+  function renderDay() {
+    const day = getDayObj(selectedDate);
+    const total = getDayTotal(day);
+    const currentProjChars = day.byProject[state.activeProjectId] || 0;
+    const dObj = parseKey(selectedDate);
+
+    if (selectedDate === todayKey) {
+      document.getElementById('dateTitle').textContent = `Сегодня, ${dObj.getDate()} ${monthsGen[dObj.getMonth()]}`;
+      document.getElementById('todayJumpBtn').style.display = 'none';
+    } else {
+      document.getElementById('dateTitle').textContent = `${dObj.getDate()} ${monthsGen[dObj.getMonth()]} ${dObj.getFullYear()}`;
+      document.getElementById('todayJumpBtn').style.display = 'inline-block';
+    }
+
+    if (document.activeElement !== charInput) {
+      charInput.value = currentProjChars > 0 ? currentProjChars : '';
+    }
+
+    const badge = document.getElementById('statusBadge');
+    if (total >= DAILY_GOAL * 2) badge.textContent = '🔥 Двойная норма!';
+    else if (total >= DAILY_GOAL) badge.textContent = '✨ Норма закрыта';
+    else if (total >= 1700) badge.textContent = `Осталось ${DAILY_GOAL - total} зн.`;
+    else badge.textContent = '';
+
+    // Плашки по книгам за день
+    const breakdown = document.getElementById('dayBreakdown');
+    breakdown.innerHTML = '';
+    Object.entries(day.byProject).forEach(([pid, val]) => {
+      if (val <= 0) return;
+      const proj = state.projects.find(p => p.id === pid);
+      const name = proj ? proj.name : 'Удаленная книга';
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.innerHTML = `<span>${name}: <b>${val.toLocaleString('ru-RU')}</b></span>`;
+      const del = document.createElement('button');
+      del.textContent = '×';
+      del.title = 'Убрать за этот день';
+      del.onclick = () => {
+        if (pid === state.activeProjectId) charInput.value = '';
+        setProjectCharsForDay(selectedDate, pid, 0);
+      };
+      chip.appendChild(del);
+      breakdown.appendChild(chip);
+    });
+
+    // Шкала прогресса
+    const pct = Math.min(100, Math.round((total / DAILY_GOAL) * 100));
+    document.getElementById('progressLabel').textContent = `${total.toLocaleString('ru-RU')} / ${DAILY_GOAL.toLocaleString('ru-RU')} зн.`;
+    document.getElementById('progressPct').textContent = `${Math.round((total / DAILY_GOAL) * 100)}%`;
+    const fill = document.getElementById('progressFill');
+    fill.style.width = `${pct}%`;
+    fill.classList.toggle('done', day.completed || total >= DAILY_GOAL);
+
+    // Кнопка выполнил
+    const btn = document.getElementById('completeBtn');
+    const btnTxt = document.getElementById('completeText');
+    const hint = document.getElementById('hintLabel');
+    if (day.completed) {
+      btn.classList.add('active');
+      btnTxt.textContent = 'Выполнено';
+      hint.textContent = total >= DAILY_GOAL ? 'Норма выполнена — засчитано автоматически' : 'День закрыт вручную';
+    } else {
+      btn.classList.remove('active');
+      btnTxt.textContent = 'Выполнил';
+      hint.textContent = 'При сумме 2000+ знаков за день птичка ставится сама';
+    }
+  }
+
+  // Календарь
+  function renderCalendar() {
+    const y = viewDate.getFullYear();
+    const m = viewDate.getMonth();
+    document.getElementById('monthLabel').textContent = `${months[m]} ${y}`;
+
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(w => {
+      const el = document.createElement('div');
+      el.className = 'cal-wd';
+      el.textContent = w;
+      grid.appendChild(el);
+    });
+
+    let offset = new Date(y, m, 1).getDay() - 1;
+    if (offset < 0) offset = 6;
+    const daysCount = new Date(y, m + 1, 0).getDate();
+
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-cell empty';
+      grid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysCount; d++) {
+      const key = formatKey(new Date(y, m, d));
+      const day = getDayObj(key);
+      const total = getDayTotal(day);
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      if (key === selectedDate) cell.classList.add('selected');
+      if (day.completed) cell.classList.add('done');
+      else if (total > 0) cell.classList.add('partial');
+
+      const num = document.createElement('span');
+      num.className = 'cal-d';
+      num.textContent = d;
+      cell.appendChild(num);
+
+      if (day.completed) {
+        const mark = document.createElement('span');
+        mark.className = 'cal-mark';
+        mark.textContent = total >= DAILY_GOAL * 2 ? '✓🔥' : '✓';
+        cell.appendChild(mark);
+      }
+
+      if (total > 0) {
+        const val = document.createElement('span');
+        val.className = 'cal-val';
+        val.textContent = total >= 1000 ? `${(total / 1000).toFixed(1).replace('.0', '')}к` : total;
+        cell.appendChild(val);
+      }
+
+      cell.onclick = () => {
+        selectedDate = key;
+        charInput.value = getDayObj(key).byProject[state.activeProjectId] || '';
+        renderAll();
+      };
+
+      grid.appendChild(cell);
+    }
+  }
+
+  // Аналитика и сводка по книгам
+  function renderStats() {
+    let totalTrackerChars = 0;
+    let doneDays = 0;
+    let monthDone = 0;
+    let activeDays = 0;
+    let maxDay = 0;
+    const projectTrackerTotals = {};
+
+    const monthPrefix = `${viewDate.getFullYear()}-${String(viewDate.getMonth() + 1).padStart(2, '0')}`;
+
+    Object.entries(state.days).forEach(([k, day]) => {
+      const t = getDayTotal(day);
+      totalTrackerChars += t;
+      if (t > 0) activeDays++;
+      if (t > maxDay) maxDay = t;
+      if (day.completed) {
+        doneDays++;
+        if (k.startsWith(monthPrefix)) monthDone++;
+      }
+      Object.entries(day.byProject || {}).forEach(([pid, val]) => {
+        projectTrackerTotals[pid] = (projectTrackerTotals[pid] || 0) + (Number(val) || 0);
+      });
+    });
+
+    // Серии
+    const sortedDone = Object.keys(state.days).filter(k => state.days[k].completed).sort();
+    let bestStreak = 0, curRun = 0, prev = null;
+    sortedDone.forEach(k => {
+      const dt = parseKey(k);
+      if (prev && Math.round((dt - prev) / 86400000) === 1) curRun++;
+      else curRun = 1;
+      if (curRun > bestStreak) bestStreak = curRun;
+      prev = dt;
+    });
+
+    let currentStreak = 0;
+    let chk = new Date();
+    if (!getDayObj(formatKey(chk)).completed) chk.setDate(chk.getDate() - 1);
+    while (getDayObj(formatKey(chk)).completed) {
+      currentStreak++;
+      chk.setDate(chk.getDate() - 1);
+    }
+
+    const avg = activeDays > 0 ? Math.round(totalTrackerChars / activeDays) : 0;
+    const pages = (totalTrackerChars / 2000).toFixed(1).replace('.0', '');
+
+    document.getElementById('stTotal').textContent = totalTrackerChars.toLocaleString('ru-RU');
+    document.getElementById('stPages').textContent = `≈ ${pages} стр. А4`;
+    document.getElementById('stDoneDays').textContent = doneDays;
+    document.getElementById('stMonthDays').textContent = `За месяц: ${monthDone}`;
+    document.getElementById('stStreak').textContent = `${currentStreak} дн.`;
+    document.getElementById('stBestStreak').textContent = `Рекорд: ${bestStreak} дн.`;
+    document.getElementById('stAvg').textContent = avg.toLocaleString('ru-RU');
+    document.getElementById('stMax').textContent = `Максимум: ${maxDay.toLocaleString('ru-RU')}`;
+
+    // Сводка по книгам
+    const summaryEl = document.getElementById('booksSummary');
+    summaryEl.innerHTML = '';
+    state.projects.forEach(p => {
+      const base = Number(p.baseChars) || 0;
+      const added = projectTrackerTotals[p.id] || 0;
+      const grandTotal = base + added;
+      const bookPages = (grandTotal / 2000).toFixed(1).replace('.0', '');
+
+      const row = document.createElement('div');
+      row.className = 'book-stat-row';
+      row.innerHTML = `
+        <div>
+          <div class="book-stat-name">${p.name}</div>
+          <div class="book-stat-meta">Было: ${base.toLocaleString('ru-RU')} + в трекере: ${added.toLocaleString('ru-RU')}</div>
+        </div>
+        <div class="book-stat-total">
+          <strong>${grandTotal.toLocaleString('ru-RU')} зн.</strong>
+          <span>≈ ${bookPages} стр. А4</span>
+        </div>
+      `;
+      summaryEl.appendChild(row);
+    });
+  }
+
+  function renderAll() {
+    renderProjectSelect();
+    renderDay();
+    renderCalendar();
+    renderStats();
+  }
+
+  // События ввода
+  charInput.addEventListener('input', (e) => {
+    setProjectCharsForDay(selectedDate, state.activeProjectId, e.target.value);
+  });
+
+  document.querySelectorAll('.q-btn[data-add]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const add = Number(btn.dataset.add);
+      const cur = getDayObj(selectedDate).byProject[state.activeProjectId] || 0;
+      const next = cur + add;
+      charInput.value = next;
+      setProjectCharsForDay(selectedDate, state.activeProjectId, next);
+    });
+  });
+
+  document.getElementById('resetProjectDayBtn').addEventListener('click', () => {
+    charInput.value = '';
+    setProjectCharsForDay(selectedDate, state.activeProjectId, 0);
+  });
+
+  document.getElementById('completeBtn').addEventListener('click', toggleDayComplete);
+
+  document.getElementById('todayJumpBtn').addEventListener('click', () => {
+    selectedDate = todayKey;
+    viewDate = new Date();
+    charInput.value = getDayObj(todayKey).byProject[state.activeProjectId] || '';
+    renderAll();
+  });
+
+  document.getElementById('prevMonthBtn').addEventListener('click', () => {
+    viewDate.setMonth(viewDate.getMonth() - 1);
+    renderCalendar();
+    renderStats();
+  });
+
+  document.getElementById('nextMonthBtn').addEventListener('click', () => {
+    viewDate.setMonth(viewDate.getMonth() + 1);
+    renderCalendar();
+    renderStats();
+  });
+
+  // Модальное окно книг
+  const modal = document.getElementById('booksModal');
+  function renderManageBooks() {
+    const list = document.getElementById('manageBooksList');
+    list.innerHTML = '';
+    state.projects.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'manage-item';
+
+      const top = document.createElement('div');
+      top.className = 'manage-item-top';
+      const title = document.createElement('strong');
+      title.textContent = p.name;
+      top.appendChild(title);
+
+      if (state.projects.length > 1) {
+        const del = document.createElement('button');
+        del.className = 'del-book-btn';
+        del.textContent = 'Удалить';
+        del.onclick = () => {
+          if (confirm(`Удалить книгу «${p.name}» из списка?`)) {
+            state.projects = state.projects.filter(x => x.id !== p.id);
+            saveState();
+            renderManageBooks();
+            renderAll();
+          }
+        };
+        top.appendChild(del);
+      }
+
+      const baseRow = document.createElement('div');
+      baseRow.className = 'manage-base-row';
+      baseRow.innerHTML = `<span>Уже написано (до трекера):</span>`;
+      const baseInput = document.createElement('input');
+      baseInput.type = 'number';
+      baseInput.min = '0';
+      baseInput.step = '500';
+      baseInput.inputMode = 'numeric';
+      baseInput.value = p.baseChars || 0;
+      baseInput.addEventListener('input', () => {
+        p.baseChars = Math.max(0, Math.floor(Number(baseInput.value) || 0));
+        saveState();
+        renderStats();
+      });
+      baseRow.appendChild(baseInput);
+
+      item.appendChild(top);
+      item.appendChild(baseRow);
+      list.appendChild(item);
+    });
+  }
+
+  document.getElementById('openBooksBtn').addEventListener('click', () => {
+    renderManageBooks();
+    modal.classList.add('open');
+  });
+
+  document.getElementById('closeModalBtn').addEventListener('click', () => {
+    modal.classList.remove('open');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('open');
+  });
+
+  document.getElementById('addBookBtn').addEventListener('click', () => {
+    const titleEl = document.getElementById('newBookTitle');
+    const baseEl = document.getElementById('newBookBase');
+    const name = titleEl.value.trim();
+    if (!name) return;
+
+    const id = 'p_' + Date.now();
+    const baseChars = Math.max(0, Math.floor(Number(baseEl.value) || 0));
+    state.projects.push({ id, name, baseChars });
+    state.activeProjectId = id;
+    saveState();
+
+    titleEl.value = '';
+    baseEl.value = '';
+    renderManageBooks();
+    renderAll();
+  });
+
+  // Экспорт / Импорт
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `writer-backup-${todayKey}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const importInput = document.getElementById('importInput');
+  document.getElementById('importBtn').addEventListener('click', () => importInput.click());
+  importInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        if (parsed && Array.isArray(parsed.projects) && typeof parsed.days === 'object') {
+          state = parsed;
+        } else if (parsed && typeof parsed === 'object') {
+          // Поддержка бэкапа из 1-й версии
+          Object.entries(parsed).forEach(([k, v]) => {
+            const c = Number(v.chars) || 0;
+            const done = Boolean(v.completed || v.done);
+            if (c > 0 || done) {
+              state.days[k] = {
+                byProject: c > 0 ? { [state.activeProjectId]: c } : {},
+                completed: done,
+                manualOverride: Boolean(v.manualOverride || v.manual)
+              };
+            }
+          });
+        }
+        saveState();
+        renderAll();
+        alert('Резервная копия успешно загружена!');
+      } catch (err) {
+        alert('Не удалось прочитать файл копии.');
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  renderAll();
+</script>
+</body>
+</html>
