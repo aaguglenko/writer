@@ -10,12 +10,13 @@
       --card: #ffffff;
       --text: #111827;
       --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-light: #eff6ff;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
       --success: #10b981;
       --success-bg: #d1fae5;
       --success-text: #065f46;
       --border: #e5e7eb;
+      --input-bg: #f9fafb;
       --danger: #ef4444;
       --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
@@ -26,11 +27,12 @@
       --text: #f8fafc;
       --muted: #94a3b8;
       --primary: #3b82f6;
-      --primary-light: #1e3a8a;
+      --primary-hover: #60a5fa;
       --success: #10b981;
-      --success-bg: #064e3b;
-      --success-text: #a7f3d0;
+      --success-bg: rgba(16, 185, 129, 0.18);
+      --success-text: #6ee7b7;
       --border: #334155;
+      --input-bg: #0f172a;
       --danger: #f87171;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
@@ -47,7 +49,7 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.45;
-      padding: 12px 12px 60px;
+      padding: 16px 12px 60px;
       transition: background-color 0.2s, color 0.2s;
     }
 
@@ -56,16 +58,15 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    /* Шапка */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 2px;
       gap: 8px;
+      padding: 4px 0;
     }
 
     .header-left {
@@ -75,38 +76,38 @@
     }
 
     header h1 {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
     .goal-badge {
-      background: var(--primary-light);
+      background: rgba(59, 130, 246, 0.12);
       color: var(--primary);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
       font-size: 0.78rem;
       font-weight: 700;
-      white-space: nowrap;
     }
 
     .header-actions {
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: 8px;
     }
 
     .icon-btn {
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 7px 11px;
+      padding: 8px 12px;
       border-radius: 10px;
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       box-shadow: var(--shadow);
     }
 
@@ -114,62 +115,67 @@
       transform: scale(0.97);
     }
 
-    /* Карточки */
     .card {
       background: var(--card);
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 18px;
+      padding: 18px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 8px;
     }
 
     .card-title {
       font-size: 1rem;
       font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
     }
 
-    .today-pill {
-      background: var(--bg);
+    .date-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .today-btn {
+      background: var(--input-bg);
       border: 1px solid var(--border);
-      color: var(--text);
       padding: 4px 10px;
       border-radius: 8px;
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
+      color: var(--primary);
     }
 
-    .bonus-badge {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #f59e0b;
-    }
-
-    /* Выбор книги и ввод */
     .project-row {
       display: flex;
       gap: 8px;
       margin-bottom: 10px;
     }
 
-    select {
-      flex: 1;
-      background: var(--bg);
+    select, input[type="number"], input[type="text"] {
+      background: var(--input-bg);
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 12px;
-      padding: 10px 12px;
       font-size: 16px;
-      font-weight: 600;
       outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--primary);
+    }
+
+    .project-select {
+      flex: 1;
+      padding: 10px 12px;
+      font-weight: 600;
+      min-width: 0;
     }
 
     .input-row {
@@ -178,24 +184,12 @@
       margin-bottom: 10px;
     }
 
-    input[type="number"], input[type="text"] {
-      background: var(--bg);
-      color: var(--text);
-      border: 2px solid var(--border);
-      border-radius: 12px;
+    .chars-input {
+      flex: 1;
       padding: 10px 14px;
-      font-size: 16px;
-      font-weight: 700;
-      outline: none;
-      width: 100%;
-    }
-
-    input[type="number"] {
       font-size: 1.35rem;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--primary);
+      font-weight: 800;
+      min-width: 0;
     }
 
     .add-btn {
@@ -211,39 +205,38 @@
     }
 
     .add-btn:active {
-      opacity: 0.9;
+      background: var(--primary-hover);
+      transform: scale(0.98);
     }
 
-    /* Быстрые кнопки */
-    .quick-grid {
+    .quick-adds {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .quick-btn {
-      background: var(--bg);
+      background: var(--input-bg);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 9px 4px;
+      padding: 8px 4px;
       border-radius: 10px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
     }
 
     .quick-btn:active {
-      background: var(--border);
+      transform: scale(0.96);
     }
 
     .quick-btn.reset {
       color: var(--danger);
     }
 
-    /* Вклады за выбранный день */
-    .day-entries {
+    .day-breakdown {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
@@ -251,10 +244,10 @@
     }
 
     .entry-chip {
-      background: var(--bg);
+      background: var(--input-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 4px 9px;
+      padding: 4px 10px;
       font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
@@ -265,28 +258,27 @@
       background: none;
       border: none;
       color: var(--danger);
-      font-weight: bold;
-      font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
-      line-height: 1;
+      font-size: 0.95rem;
+      padding: 0 2px;
     }
 
-    /* Шкала прогресса */
-    .progress-box {
-      margin-bottom: 14px;
+    .progress-wrapper {
+      margin-bottom: 16px;
     }
 
-    .progress-meta {
+    .progress-labels {
       display: flex;
       justify-content: space-between;
       font-size: 0.85rem;
-      font-weight: 600;
       margin-bottom: 6px;
+      font-weight: 600;
     }
 
     .progress-track {
-      height: 14px;
-      background: var(--bg);
+      height: 16px;
+      background: var(--input-bg);
       border-radius: 999px;
       overflow: hidden;
       position: relative;
@@ -300,7 +292,7 @@
       transition: width 0.3s ease, background-color 0.3s ease;
     }
 
-    .progress-fill.done {
+    .progress-fill.completed {
       background: var(--success);
     }
 
@@ -315,15 +307,12 @@
       flex: 1;
       border-right: 1px solid rgba(150, 150, 150, 0.25);
     }
-    .tick:last-child {
-      border-right: none;
-    }
+    .tick:last-child { border-right: none; }
 
-    /* Кнопка Выполнил */
-    .done-btn {
+    .complete-btn {
       width: 100%;
-      padding: 13px;
-      border-radius: 12px;
+      padding: 14px;
+      border-radius: 14px;
       border: 2px solid var(--border);
       background: var(--card);
       color: var(--text);
@@ -333,34 +322,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       transition: all 0.2s;
     }
 
-    .done-btn.active {
+    .complete-btn.is-done {
       background: var(--success);
       border-color: var(--success);
       color: #ffffff;
     }
 
-    .check-circle {
+    .complete-btn .check-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       border: 2px solid currentColor;
       font-size: 0.85rem;
     }
 
-    .done-btn.active .check-circle {
+    .complete-btn.is-done .check-icon {
       background: #ffffff;
       color: var(--success);
       border-color: #ffffff;
     }
 
-    .hint {
+    .hint-text {
       text-align: center;
       font-size: 0.76rem;
       color: var(--muted);
@@ -368,30 +357,32 @@
     }
 
     /* Календарь */
-    .cal-nav-group {
+    .cal-controls {
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: 8px;
     }
 
     .cal-nav {
-      background: var(--bg);
+      background: var(--input-bg);
       border: 1px solid var(--border);
       color: var(--text);
       width: 34px;
       height: 34px;
-      border-radius: 9px;
-      font-weight: 700;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
     }
 
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 4px;
+      text-align: center;
     }
 
     .cal-weekday {
-      text-align: center;
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--muted);
@@ -399,16 +390,18 @@
     }
 
     .cal-day {
-      min-height: 48px;
-      border-radius: 9px;
+      aspect-ratio: 1 / 1.05;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--card);
       padding: 3px 2px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
+      background: var(--card);
+      min-height: 46px;
+      overflow: hidden;
     }
 
     .cal-day.empty {
@@ -427,7 +420,8 @@
     }
 
     .cal-day.partial {
-      background: var(--primary-light);
+      background: rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.4);
     }
 
     .cal-num {
@@ -438,157 +432,155 @@
       line-height: 1;
     }
 
-    .cal-check {
+    .cal-status {
       font-size: 0.78rem;
       font-weight: 800;
       color: var(--success);
       line-height: 1;
     }
 
-    .cal-day.done .cal-check {
-      color: var(--success-text);
-    }
-
-    .cal-val {
+    .cal-chars {
       font-size: 0.62rem;
       color: var(--muted);
       line-height: 1;
     }
 
-    .cal-day.done .cal-val {
+    .cal-day.done .cal-chars {
       color: var(--success-text);
       font-weight: 600;
     }
 
-    /* Аналитика */
+    /* Статистика */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 16px;
     }
 
-    .stat-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    .stat-box {
+      background: var(--input-bg);
       padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
 
-    .stat-val {
+    .stat-value {
       font-size: 1.25rem;
       font-weight: 800;
+      margin-bottom: 2px;
     }
 
-    .stat-lbl {
+    .stat-label {
       font-size: 0.75rem;
       color: var(--muted);
     }
 
     .stat-sub {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--primary);
+      margin-top: 3px;
       font-weight: 600;
-      margin-top: 2px;
     }
 
-    /* Список книг в аналитике */
-    .books-summary {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .books-summary-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--muted);
     }
 
-    .book-stat-row {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 12px;
+    .book-stat-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-    }
-
-    .book-stat-info {
-      display: flex;
-      flex-direction: column;
+      padding: 10px 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 6px;
+      gap: 8px;
     }
 
     .book-stat-name {
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
-    .book-stat-breakdown {
-      font-size: 0.75rem;
+    .book-stat-meta {
+      font-size: 0.74rem;
       color: var(--muted);
     }
 
     .book-stat-total {
       text-align: right;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--primary);
       white-space: nowrap;
     }
 
-    .book-stat-chars {
-      font-weight: 800;
-      font-size: 0.95rem;
-      color: var(--primary);
+    /* Облачная синхронизация и бэкап */
+    .sync-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
     }
 
-    .book-stat-pages {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    /* Облачная синхронизация */
-    .sync-box {
+    .sync-header {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
     }
 
     .sync-row {
       display: flex;
       gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .sync-input {
+      flex: 1;
+      padding: 9px 12px;
+      min-width: 0;
     }
 
     .sync-status {
       font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      word-break: break-word;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .sync-status.ok {
-      color: var(--success-text);
-      background: var(--success-bg);
-      border-color: var(--success);
-    }
+    .sync-status.ok { color: var(--success); font-weight: 600; }
+    .sync-status.err { color: var(--danger); font-weight: 600; }
 
-    .sync-status.err {
-      color: var(--danger);
-    }
-
-    .backup-actions {
+    .backup-btns {
       display: flex;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
 
-    .btn-outline {
+    .btn-small {
       flex: 1;
-      background: var(--bg);
+      background: var(--input-bg);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 9px;
+      padding: 8px 10px;
       border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
       cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
       text-align: center;
     }
 
@@ -610,14 +602,13 @@
 
     .modal {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
+      padding: 20px;
       width: 100%;
-      max-width: 480px;
+      max-width: 460px;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 18px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
     }
 
     .modal-header {
@@ -628,68 +619,55 @@
     }
 
     .close-modal {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      font-size: 1.1rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--muted);
       cursor: pointer;
     }
 
-    .new-book-form {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 14px;
-    }
-
-    .book-manage-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     .book-manage-item {
-      background: var(--bg);
+      padding: 10px;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-bottom: 8px;
+      background: var(--input-bg);
     }
 
     .book-manage-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      margin-bottom: 6px;
+      font-weight: 700;
     }
 
-    .book-manage-base {
+    .book-base-row {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 0.82rem;
+      color: var(--muted);
     }
 
-    .book-manage-base input {
-      padding: 6px 10px;
-      font-size: 0.9rem;
+    .book-base-input {
+      width: 120px;
+      padding: 6px 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
-    .del-book-btn {
-      background: none;
-      border: 1px solid var(--danger);
-      color: var(--danger);
-      padding: 4px 8px;
-      border-radius: 7px;
-      font-size: 0.75rem;
-      cursor: pointer;
+    .new-book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .new-book-form input {
+      padding: 10px 12px;
     }
   </style>
 </head>
@@ -703,67 +681,64 @@
     </div>
     <div class="header-actions">
       <button class="icon-btn" id="openBooksBtn">📚 Книги</button>
-      <button class="icon-btn" id="themeBtn" title="Сменить тему">🌓</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Сменить тему">🌓</button>
     </div>
   </header>
 
-  <!-- Блок дня -->
+  <!-- Ввод за день -->
   <section class="card">
-    <div class="card-header">
-      <div>
-        <span class="card-title" id="selectedDateTitle">Сегодня</span>
-        <button class="today-pill" id="jumpTodayBtn" style="display: none; margin-left: 6px;">В сегодня</button>
+    <div class="card-title">
+      <div class="date-header">
+        <span id="selectedDateLabel">Сегодня</span>
+        <button class="today-btn" id="jumpTodayBtn" style="display: none;">В сегодня</button>
       </div>
-      <span class="bonus-badge" id="bonusBadge"></span>
+      <span id="bonusBadge" style="font-size: 0.8rem; color: #f59e0b; font-weight: 700;"></span>
     </div>
 
     <div class="project-row">
-      <select id="projectSelect"></select>
+      <select id="projectSelect" class="project-select"></select>
     </div>
 
     <div class="input-row">
-      <input type="number" id="charInput" min="0" step="100" placeholder="Сколько знаков?" inputmode="numeric">
-      <button class="add-btn" id="addCharsBtn">+ Добавить</button>
+      <input type="number" id="charInput" class="chars-input" min="0" step="50" placeholder="Знаков..." inputmode="numeric">
+      <button class="add-btn" id="addCustomBtn">+ Добавить</button>
     </div>
 
-    <div class="quick-grid">
+    <div class="quick-adds">
       <button class="quick-btn" data-add="250">+250</button>
       <button class="quick-btn" data-add="500">+500</button>
       <button class="quick-btn" data-add="1000">+1000</button>
       <button class="quick-btn" data-add="2000">+2000</button>
-      <button class="quick-btn reset" id="resetDayBtn">Сброс</button>
+      <button class="quick-btn reset" id="clearDayBtn">Сброс</button>
     </div>
 
-    <div class="day-entries" id="dayEntries"></div>
+    <div class="day-breakdown" id="dayBreakdown"></div>
 
-    <div class="progress-box">
-      <div class="progress-meta">
+    <div class="progress-wrapper">
+      <div class="progress-labels">
         <span id="progressText">0 / 2 000 зн.</span>
         <span id="progressPercent">0%</span>
       </div>
       <div class="progress-track">
         <div class="progress-fill" id="progressFill"></div>
         <div class="ticks">
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
+          <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
         </div>
       </div>
     </div>
 
-    <button class="done-btn" id="doneBtn">
-      <span class="check-circle">✓</span>
-      <span id="doneBtnText">Выполнил</span>
+    <button class="complete-btn" id="completeBtn">
+      <span class="check-icon">✓</span>
+      <span id="completeBtnText">Выполнил</span>
     </button>
-    <div class="hint" id="statusHint">При сумме 2000+ знаков за день птичка ставится сама</div>
+    <div class="hint-text" id="statusHint">При сумме 2000+ знаков за день птичка ставится сама</div>
   </section>
 
   <!-- Календарь -->
   <section class="card">
-    <div class="card-header">
-      <span class="card-title" id="monthLabel">Месяц</span>
-      <div class="cal-nav-group">
+    <div class="card-title">
+      <span id="monthYearLabel">Месяц</span>
+      <div class="cal-controls">
         <button class="cal-nav" id="prevMonthBtn">←</button>
         <button class="cal-nav" id="nextMonthBtn">→</button>
       </div>
@@ -771,61 +746,53 @@
     <div class="calendar-grid" id="calendarGrid"></div>
   </section>
 
-  <!-- Сквозная аналитика -->
+  <!-- Сквозная статистика -->
   <section class="card">
-    <div class="card-header">
-      <span class="card-title">Сквозная статистика</span>
-    </div>
-
+    <div class="card-title"><span>Сквозная статистика</span></div>
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-val" id="statTotalChars">0</div>
-        <div class="stat-lbl">Написано в трекере</div>
+      <div class="stat-box">
+        <div class="stat-value" id="statTotalChars">0</div>
+        <div class="stat-label">Написано в трекере</div>
         <div class="stat-sub" id="statPages">≈ 0 стр. А4</div>
       </div>
-
-      <div class="stat-card">
-        <div class="stat-val" id="statDoneDays">0</div>
-        <div class="stat-lbl">Дней с птичкой</div>
-        <div class="stat-sub" id="statMonthDays">За месяц: 0</div>
+      <div class="stat-box">
+        <div class="stat-value" id="statDaysDone">0</div>
+        <div class="stat-label">Дней с птичкой</div>
+        <div class="stat-sub" id="statMonthDone">За месяц: 0</div>
       </div>
-
-      <div class="stat-card">
-        <div class="stat-val" id="statStreak">0 дн.</div>
-        <div class="stat-lbl">Текущая серия</div>
+      <div class="stat-box">
+        <div class="stat-value" id="statStreak">0 дн.</div>
+        <div class="stat-label">Текущая серия</div>
         <div class="stat-sub" id="statBestStreak">Рекорд: 0 дн.</div>
       </div>
-
-      <div class="stat-card">
-        <div class="stat-val" id="statAvg">0</div>
-        <div class="stat-lbl">Среднее в день</div>
-        <div class="stat-sub" id="statMax">Максимум: 0</div>
+      <div class="stat-box">
+        <div class="stat-value" id="statAvgChars">0</div>
+        <div class="stat-label">Среднее в день</div>
+        <div class="stat-sub" id="statBestDay">Максимум: 0</div>
       </div>
     </div>
 
-    <div class="card-header" style="margin-top: 8px; margin-bottom: 8px;">
-      <span class="card-title" style="font-size: 0.95rem;">Объем по книгам (всего)</span>
-    </div>
-    <div class="books-summary" id="booksSummary"></div>
+    <div class="books-summary-title">Объем по книгам (всего)</div>
+    <div id="booksSummaryList"></div>
   </section>
 
-  <!-- Облако и резервные копии -->
-  <section class="card">
-    <div class="card-header">
-      <span class="card-title">☁️ Облачная синхронизация</span>
+  <!-- Облачная синхронизация и бэкап -->
+  <section class="sync-card">
+    <div class="sync-header">
+      <span>☁️ Облачная синхронизация</span>
     </div>
-    <div class="sync-box">
-      <div class="sync-row">
-        <input type="text" id="syncKeyInput" placeholder="Придумайте секретный код (напр. mira-2026)">
-        <button class="add-btn" id="connectSyncBtn">Подключить</button>
-      </div>
-      <div class="sync-status" id="syncStatus">Не подключено (данные только в этом браузере)</div>
-      <button class="btn-outline" id="forceSyncBtn" style="display: none;">Обновить сейчас</button>
+    <div class="sync-row">
+      <input type="text" id="syncKeyInput" class="sync-input" placeholder="Придумайте секретный код (напр. mira-2026)">
+      <button class="add-btn" id="connectSyncBtn" style="padding: 0 14px;">Подключить</button>
+    </div>
+    <div class="sync-status" id="syncStatusText">
+      <span>Не подключено (данные только в этом браузере)</span>
+      <button id="forceSyncBtn" style="background:none;border:none;color:var(--primary);font-weight:700;cursor:pointer;display:none;">Обновить сейчас</button>
     </div>
 
-    <div class="backup-actions" style="margin-top: 14px;">
-      <button class="btn-outline" id="exportBtn">⬇ Скачать копию (JSON)</button>
-      <button class="btn-outline" id="importBtn">⬆ Загрузить копию</button>
+    <div class="backup-btns">
+      <button class="btn-small" id="exportBtn">⬇ Скачать копию (JSON)</button>
+      <button class="btn-small" id="importBtn">⬆ Загрузить копию</button>
       <input type="file" id="importFile" accept=".json" style="display: none;">
     </div>
   </section>
@@ -835,17 +802,16 @@
 <div class="modal-backdrop" id="booksModal">
   <div class="modal">
     <div class="modal-header">
-      <h2 style="font-size: 1.1rem;">Мои книги и проекты</h2>
+      <h3>Мои книги и проекты</h3>
       <button class="close-modal" id="closeBooksBtn">✕</button>
     </div>
-
+    <div id="booksManageList"></div>
     <div class="new-book-form">
-      <input type="text" id="newBookName" placeholder="Название новой книги">
-      <input type="number" id="newBookBase" min="0" step="100" placeholder="Уже написано знаков до трекера (0)" inputmode="numeric">
-      <button class="add-btn" id="createBookBtn" style="padding: 11px;">+ Создать книгу</button>
+      <strong style="font-size: 0.88rem;">Добавить новую книгу</strong>
+      <input type="text" id="newBookName" placeholder="Название книги или проекта">
+      <input type="number" id="newBookBase" placeholder="Уже написано знаков (если есть)" min="0" inputmode="numeric">
+      <button class="add-btn" id="createBookBtn" style="padding: 12px;">+ Создать книгу</button>
     </div>
-
-    <div class="book-manage-list" id="bookManageList"></div>
   </div>
 </div>
 
@@ -854,22 +820,20 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_LsOIwd-3gDF4BBKd2HZOtw_KDOS9ZDK';
 
   const DAILY_GOAL = 2000;
-  const STORAGE_KEY = 'writer_studio_state_v1';
-  const SYNC_KEY_STORAGE = 'writer_studio_sync_key';
-  const THEME_STORAGE = 'writer_studio_theme';
+  const STATE_KEY = 'writer_studio_state_v3';
+  const SYNC_CODE_KEY = 'writer_sync_secret_code';
+  const THEME_KEY = 'writer_studio_theme';
 
-  // Тема оформления
-  const savedTheme = localStorage.getItem(THEME_STORAGE) || 'light';
+  // Тема
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
   if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-
   document.getElementById('themeBtn').addEventListener('click', () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const next = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem(THEME_STORAGE, next);
+    localStorage.setItem(THEME_KEY, next);
   });
 
-  // Форматирование дат
   function formatDateKey(date) {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -882,287 +846,291 @@
     return new Date(y, m - 1, d);
   }
 
-  // Состояние приложения
-  let state = loadInitialState();
+  // Санитизация и лечение данных (защита от undefined)
+  function sanitizeState(raw) {
+    const clean = {
+      books: [],
+      records: {},
+      selectedBookId: 'book_default',
+      updatedAt: (raw && typeof raw.updatedAt === 'number') ? raw.updatedAt : 0
+    };
+
+    if (raw && Array.isArray(raw.books)) {
+      raw.books.forEach((b, idx) => {
+        if (typeof b === 'string' && b.trim()) {
+          clean.books.push({
+            id: 'book_migrated_' + idx,
+            name: b.trim(),
+            baseChars: 0
+          });
+        } else if (b && typeof b === 'object') {
+          const validName = (typeof b.name === 'string' && b.name.trim() && b.name !== 'undefined')
+            ? b.name.trim()
+            : null;
+          if (validName) {
+            clean.books.push({
+              id: (typeof b.id === 'string' && b.id) ? b.id : ('book_' + idx + '_' + Date.now()),
+              name: validName,
+              baseChars: Math.max(0, Number(b.baseChars) || 0)
+            });
+          }
+        }
+      });
+    }
+
+    if (clean.books.length === 0) {
+      clean.books.push({ id: 'book_default', name: 'Основная книга', baseChars: 0 });
+    }
+
+    if (raw && raw.records && typeof raw.records === 'object') {
+      Object.entries(raw.records).forEach(([dateKey, rec]) => {
+        if (!rec || typeof rec !== 'object') return;
+        const entries = {};
+        if (rec.entries && typeof rec.entries === 'object') {
+          Object.entries(rec.entries).forEach(([bId, val]) => {
+            const num = Math.max(0, Number(val) || 0);
+            if (num > 0) entries[bId] = num;
+          });
+        } else if (typeof rec.chars === 'number' && rec.chars > 0) {
+          entries[clean.books[0].id] = rec.chars;
+        }
+        if (Object.keys(entries).length > 0 || rec.completed) {
+          clean.records[dateKey] = {
+            entries,
+            completed: Boolean(rec.completed),
+            manualOverride: Boolean(rec.manualOverride)
+          };
+        }
+      });
+    }
+
+    if (!clean.books.some(b => b.id === raw?.selectedBookId)) {
+      clean.selectedBookId = clean.books[0].id;
+    } else {
+      clean.selectedBookId = raw.selectedBookId;
+    }
+
+    return clean;
+  }
 
   function loadInitialState() {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
+    const saved = localStorage.getItem(STATE_KEY);
+    if (saved) {
       try {
-        const parsed = JSON.parse(raw);
-        if (parsed && Array.isArray(parsed.projects) && parsed.days) {
-          return parsed;
-        }
+        return sanitizeState(JSON.parse(saved));
       } catch (e) {}
     }
 
-    const defaultProjects = [{ id: 'book_default', name: 'Основная книга', baseChars: 0 }];
-    const migratedDays = {};
+    const oldV2 = localStorage.getItem('writer_tracker_projects_v1');
+    if (oldV2) {
+      try {
+        return sanitizeState(JSON.parse(oldV2));
+      } catch (e) {}
+    }
 
-    const oldV1 = localStorage.getItem('writer_tracker_2k_v1') || localStorage.getItem('writer_tracker_data_v1');
+    const oldV1 = localStorage.getItem('writer_tracker_2k_v1');
     if (oldV1) {
       try {
-        const oldData = JSON.parse(oldV1);
-        Object.entries(oldData).forEach(([dateKey, val]) => {
-          const c = Number(val.chars || 0);
-          const done = Boolean(val.completed || val.done);
-          if (c > 0 || done) {
-            migratedDays[dateKey] = {
-              byProject: c > 0 ? { book_default: c } : {},
-              completed: done,
-              manualOverride: Boolean(val.manualOverride || val.manual)
-            };
-          }
+        const parsed = JSON.parse(oldV1);
+        return sanitizeState({
+          books: [{ id: 'book_default', name: 'Основная книга', baseChars: 0 }],
+          records: parsed,
+          selectedBookId: 'book_default',
+          updatedAt: Date.now()
         });
       } catch (e) {}
     }
 
-    return {
-      projects: defaultProjects,
-      selectedProjectId: 'book_default',
-      days: migratedDays,
-      updatedAt: Date.now()
-    };
+    return sanitizeState(null);
   }
 
+  let state = loadInitialState();
+  const todayKey = formatDateKey(new Date());
+  let selectedDateKey = todayKey;
+  let viewDate = new Date();
+  let syncCode = localStorage.getItem(SYNC_CODE_KEY) || '';
+
   function saveState(skipCloud = false) {
+    state = sanitizeState(state);
     state.updatedAt = Date.now();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    if (!skipCloud) {
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    if (!skipCloud && syncCode) {
       pushToCloud();
     }
   }
 
-  const todayKey = formatDateKey(new Date());
-  let selectedDateKey = todayKey;
-  let viewDate = new Date();
-
-  const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-  const monthNamesGen = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-
   function getDayRecord(key) {
-    return state.days[key] || { byProject: {}, completed: false, manualOverride: false };
+    return state.records[key] || { entries: {}, completed: false, manualOverride: false };
   }
 
-  function getDayTotalChars(dayRec) {
-    return Object.values(dayRec.byProject || {}).reduce((sum, v) => sum + (Number(v) || 0), 0);
+  function getDayTotalChars(rec) {
+    if (!rec || !rec.entries) return 0;
+    return Object.values(rec.entries).reduce((sum, val) => sum + (Number(val) || 0), 0);
   }
 
-  function recalcDayCompletion(key) {
-    const rec = getDayRecord(key);
-    const total = getDayTotalChars(rec);
+  function addCharsToDay(amount) {
+    const add = Math.floor(Number(amount) || 0);
+    if (add <= 0) return;
+
+    const bookId = state.selectedBookId || state.books[0].id;
+    const rec = getDayRecord(selectedDateKey);
+    const entries = { ...(rec.entries || {}) };
+    entries[bookId] = (entries[bookId] || 0) + add;
+
+    const total = Object.values(entries).reduce((s, v) => s + v, 0);
+    let completed = rec.completed;
+    let manualOverride = rec.manualOverride;
 
     if (total >= DAILY_GOAL) {
-      rec.completed = true;
-      rec.manualOverride = false;
-    } else if (!rec.manualOverride) {
-      rec.completed = false;
+      completed = true;
+      manualOverride = false;
     }
 
-    if (total === 0 && !rec.completed) {
-      delete state.days[key];
-    } else {
-      state.days[key] = rec;
-    }
+    state.records[selectedDateKey] = { entries, completed, manualOverride };
+    saveState();
+    renderAll();
   }
 
-  function addCharsToSelectedProject(amount) {
-    const val = Math.floor(Number(amount) || 0);
-    if (val <= 0) return;
-
-    const projId = state.selectedProjectId || state.projects[0]?.id;
-    if (!projId) return;
-
+  function removeBookEntryForDay(bookId) {
     const rec = getDayRecord(selectedDateKey);
-    if (!rec.byProject) rec.byProject = {};
-    rec.byProject[projId] = (rec.byProject[projId] || 0) + val;
+    const entries = { ...(rec.entries || {}) };
+    delete entries[bookId];
 
-    state.days[selectedDateKey] = rec;
-    recalcDayCompletion(selectedDateKey);
+    const total = Object.values(entries).reduce((s, v) => s + v, 0);
+    let completed = rec.completed;
+    let manualOverride = rec.manualOverride;
+
+    if (total < DAILY_GOAL && !manualOverride) {
+      completed = false;
+    }
+
+    if (total === 0 && !completed) {
+      delete state.records[selectedDateKey];
+    } else {
+      state.records[selectedDateKey] = { entries, completed, manualOverride };
+    }
     saveState();
     renderAll();
   }
 
-  // Элементы DOM
-  const projectSelect = document.getElementById('projectSelect');
-  const charInput = document.getElementById('charInput');
-  const dayEntries = document.getElementById('dayEntries');
-  const progressText = document.getElementById('progressText');
-  const progressPercent = document.getElementById('progressPercent');
-  const progressFill = document.getElementById('progressFill');
-  const doneBtn = document.getElementById('doneBtn');
-  const doneBtnText = document.getElementById('doneBtnText');
-  const statusHint = document.getElementById('statusHint');
-  const bonusBadge = document.getElementById('bonusBadge');
-
-  function renderProjectSelector() {
-    if (!state.projects.length) {
-      state.projects.push({ id: 'book_default', name: 'Основная книга', baseChars: 0 });
-    }
-    if (!state.projects.some(p => p.id === state.selectedProjectId)) {
-      state.selectedProjectId = state.projects[0].id;
-    }
-
-    projectSelect.innerHTML = '';
-    state.projects.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.id;
-      opt.textContent = p.name;
-      if (p.id === state.selectedProjectId) opt.selected = true;
-      projectSelect.appendChild(opt);
-    });
-  }
-
-  projectSelect.addEventListener('change', (e) => {
-    state.selectedProjectId = e.target.value;
-    saveState(true);
-  });
-
-  document.getElementById('addCharsBtn').addEventListener('click', () => {
-    const val = Number(charInput.value);
-    if (val > 0) {
-      addCharsToSelectedProject(val);
-      charInput.value = '';
-    }
-  });
-
-  charInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const val = Number(charInput.value);
-      if (val > 0) {
-        addCharsToSelectedProject(val);
-        charInput.value = '';
-      }
-    }
-  });
-
-  document.querySelectorAll('.quick-btn[data-add]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      addCharsToSelectedProject(Number(btn.dataset.add));
-    });
-  });
-
-  document.getElementById('resetDayBtn').addEventListener('click', () => {
-    delete state.days[selectedDateKey];
-    charInput.value = '';
-    saveState();
-    renderAll();
-  });
-
-  doneBtn.addEventListener('click', () => {
+  function toggleComplete() {
     const rec = getDayRecord(selectedDateKey);
     const total = getDayTotalChars(rec);
     const nextCompleted = !rec.completed;
 
     if (total === 0 && !nextCompleted) {
-      delete state.days[selectedDateKey];
+      delete state.records[selectedDateKey];
     } else {
-      rec.completed = nextCompleted;
-      rec.manualOverride = true;
-      state.days[selectedDateKey] = rec;
+      state.records[selectedDateKey] = {
+        entries: rec.entries || {},
+        completed: nextCompleted,
+        manualOverride: true
+      };
     }
-
     saveState();
     renderAll();
-  });
+  }
 
-  document.getElementById('jumpTodayBtn').addEventListener('click', () => {
-    selectedDateKey = todayKey;
-    viewDate = new Date();
-    renderAll();
-  });
+  const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+  const monthNamesGen = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 
-  function renderDayCard() {
+  function renderProjectSelector() {
+    const select = document.getElementById('projectSelect');
+    select.innerHTML = '';
+    state.books.forEach(book => {
+      const opt = document.createElement('option');
+      opt.value = book.id;
+      opt.textContent = book.name;
+      if (book.id === state.selectedBookId) opt.selected = true;
+      select.appendChild(opt);
+    });
+  }
+
+  function renderDayEditor() {
+    const rec = getDayRecord(selectedDateKey);
+    const total = getDayTotalChars(rec);
     const dateObj = parseDateKey(selectedDateKey);
-    const titleEl = document.getElementById('selectedDateTitle');
-    const jumpBtn = document.getElementById('jumpTodayBtn');
 
+    const label = document.getElementById('selectedDateLabel');
+    const jumpBtn = document.getElementById('jumpTodayBtn');
     if (selectedDateKey === todayKey) {
-      titleEl.textContent = `Сегодня, ${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]}`;
+      label.textContent = `Сегодня, ${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]}`;
       jumpBtn.style.display = 'none';
     } else {
-      titleEl.textContent = `${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+      label.textContent = `${dateObj.getDate()} ${monthNamesGen[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
       jumpBtn.style.display = 'inline-block';
     }
 
-    const rec = getDayRecord(selectedDateKey);
-    const total = getDayTotalChars(rec);
+    const badge = document.getElementById('bonusBadge');
+    if (total >= DAILY_GOAL * 2) badge.textContent = '🔥 Двойная норма!';
+    else if (total >= DAILY_GOAL) badge.textContent = '✨ Норма выполнена';
+    else if (total >= 1700) badge.textContent = `Осталось ${DAILY_GOAL - total} зн.!`;
+    else badge.textContent = '';
 
-    if (total >= DAILY_GOAL * 2) {
-      bonusBadge.textContent = '🔥 Двойная норма!';
-    } else if (total >= DAILY_GOAL) {
-      bonusBadge.textContent = '✨ Норма есть';
-    } else if (total >= 1600) {
-      bonusBadge.textContent = `Осталось ${DAILY_GOAL - total} зн.`;
-    } else {
-      bonusBadge.textContent = '';
+    const breakdown = document.getElementById('dayBreakdown');
+    breakdown.innerHTML = '';
+    if (rec.entries) {
+      Object.entries(rec.entries).forEach(([bookId, chars]) => {
+        if (chars <= 0) return;
+        const book = state.books.find(b => b.id === bookId);
+        const name = book ? book.name : 'Удаленная книга';
+        const chip = document.createElement('div');
+        chip.className = 'entry-chip';
+        chip.innerHTML = `<span>${name}: <b>${chars.toLocaleString('ru-RU')}</b></span>`;
+        const del = document.createElement('button');
+        del.textContent = '×';
+        del.title = 'Убрать запись';
+        del.onclick = () => removeBookEntryForDay(bookId);
+        chip.appendChild(del);
+        breakdown.appendChild(chip);
+      });
     }
 
-    dayEntries.innerHTML = '';
-    Object.entries(rec.byProject || {}).forEach(([projId, chars]) => {
-      if (chars <= 0) return;
-      const proj = state.projects.find(p => p.id === projId);
-      const projName = proj ? proj.name : 'Удаленная книга';
-
-      const chip = document.createElement('div');
-      chip.className = 'entry-chip';
-      chip.innerHTML = `<span><b>${projName}:</b> ${chars.toLocaleString('ru-RU')}</span>`;
-
-      const delBtn = document.createElement('button');
-      delBtn.textContent = '×';
-      delBtn.title = 'Удалить запись по этой книге за день';
-      delBtn.onclick = () => {
-        delete rec.byProject[projId];
-        recalcDayCompletion(selectedDateKey);
-        saveState();
-        renderAll();
-      };
-
-      chip.appendChild(delBtn);
-      dayEntries.appendChild(chip);
-    });
-
     const pct = Math.min(100, Math.round((total / DAILY_GOAL) * 100));
-    progressText.textContent = `${total.toLocaleString('ru-RU')} / ${DAILY_GOAL.toLocaleString('ru-RU')} зн.`;
-    progressPercent.textContent = `${Math.round((total / DAILY_GOAL) * 100)}%`;
-    progressFill.style.width = `${pct}%`;
+    document.getElementById('progressText').textContent = `${total.toLocaleString('ru-RU')} / ${DAILY_GOAL.toLocaleString('ru-RU')} зн.`;
+    document.getElementById('progressPercent').textContent = `${Math.round((total / DAILY_GOAL) * 100)}%`;
+    const fill = document.getElementById('progressFill');
+    fill.style.width = `${pct}%`;
+
+    const btn = document.getElementById('completeBtn');
+    const btnText = document.getElementById('completeBtnText');
+    const hint = document.getElementById('statusHint');
 
     if (rec.completed || total >= DAILY_GOAL) {
-      progressFill.classList.add('done');
+      fill.classList.add('completed');
     } else {
-      progressFill.classList.remove('done');
+      fill.classList.remove('completed');
     }
 
     if (rec.completed) {
-      doneBtn.classList.add('active');
-      doneBtnText.textContent = 'Выполнено';
-      statusHint.textContent = total >= DAILY_GOAL
-        ? 'Норма выполнена — засчитано автоматически'
-        : 'День засчитан вручную';
+      btn.classList.add('is-done');
+      btnText.textContent = 'Выполнено';
+      hint.textContent = total >= DAILY_GOAL ? 'Норма выполнена — засчитано автоматически' : 'День закрыт вручную';
     } else {
-      doneBtn.classList.remove('active');
-      doneBtnText.textContent = 'Выполнил';
-      statusHint.textContent = 'При сумме 2000+ знаков за день птичка ставится сама';
+      btn.classList.remove('is-done');
+      btnText.textContent = 'Выполнил';
+      hint.textContent = 'При сумме 2000+ знаков за день птичка ставится сама';
     }
   }
 
   function renderCalendar() {
     const year = viewDate.getFullYear();
     const month = viewDate.getMonth();
-    document.getElementById('monthLabel').textContent = `${monthNames[month]} ${year}`;
+    document.getElementById('monthYearLabel').textContent = `${monthNames[month]} ${year}`;
 
     const grid = document.getElementById('calendarGrid');
     grid.innerHTML = '';
 
-    ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(w => {
+    ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(d => {
       const el = document.createElement('div');
       el.className = 'cal-weekday';
-      el.textContent = w;
+      el.textContent = d;
       grid.appendChild(el);
     });
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const offset = firstDay === 0 ? 6 : firstDay - 1;
+    const firstDay = new Date(year, month, 1);
+    let offset = firstDay.getDay() - 1;
+    if (offset < 0) offset = 6;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     for (let i = 0; i < offset; i++) {
@@ -1171,91 +1139,79 @@
       grid.appendChild(empty);
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
-      const key = formatDateKey(new Date(year, month, d));
-      const rec = getDayRecord(key);
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateKey = formatDateKey(new Date(year, month, day));
+      const rec = getDayRecord(dateKey);
       const total = getDayTotalChars(rec);
 
       const cell = document.createElement('div');
       cell.className = 'cal-day';
-      if (key === selectedDateKey) cell.classList.add('selected');
+      if (dateKey === selectedDateKey) cell.classList.add('selected');
       if (rec.completed) cell.classList.add('done');
       else if (total > 0) cell.classList.add('partial');
 
       const num = document.createElement('span');
       num.className = 'cal-num';
-      num.textContent = d;
+      num.textContent = day;
       cell.appendChild(num);
 
       if (rec.completed) {
-        const chk = document.createElement('span');
-        chk.className = 'cal-check';
-        chk.textContent = total >= DAILY_GOAL * 2 ? '✓🔥' : '✓';
-        cell.appendChild(chk);
+        const st = document.createElement('span');
+        st.className = 'cal-status';
+        st.textContent = total >= DAILY_GOAL * 2 ? '✓🔥' : '✓';
+        cell.appendChild(st);
       }
 
       if (total > 0) {
-        const val = document.createElement('span');
-        val.className = 'cal-val';
-        val.textContent = total >= 1000 ? `${(total / 1000).toFixed(1).replace('.0', '')}к` : total;
-        cell.appendChild(val);
+        const ch = document.createElement('span');
+        ch.className = 'cal-chars';
+        ch.textContent = total >= 1000 ? `${(total / 1000).toFixed(1).replace('.0', '')}к` : total;
+        cell.appendChild(ch);
       }
 
-      cell.addEventListener('click', () => {
-        selectedDateKey = key;
+      cell.onclick = () => {
+        selectedDateKey = dateKey;
         renderAll();
-      });
-
+      };
       grid.appendChild(cell);
     }
   }
 
-  document.getElementById('prevMonthBtn').addEventListener('click', () => {
-    viewDate.setMonth(viewDate.getMonth() - 1);
-    renderCalendar();
-    renderAnalytics();
-  });
-
-  document.getElementById('nextMonthBtn').addEventListener('click', () => {
-    viewDate.setMonth(viewDate.getMonth() + 1);
-    renderCalendar();
-    renderAnalytics();
-  });
-
   function renderAnalytics() {
     let totalTrackerChars = 0;
-    let doneDays = 0;
+    let daysDone = 0;
     let monthDone = 0;
     let activeDays = 0;
-    let maxDay = 0;
-    const perProjectTracker = {};
+    let bestDay = 0;
+    const bookTrackerTotals = {};
 
     const monthPrefix = `${viewDate.getFullYear()}-${String(viewDate.getMonth() + 1).padStart(2, '0')}`;
 
-    Object.entries(state.days).forEach(([key, rec]) => {
-      const daySum = getDayTotalChars(rec);
-      totalTrackerChars += daySum;
-      if (daySum > 0) activeDays++;
-      if (daySum > maxDay) maxDay = daySum;
+    Object.entries(state.records).forEach(([key, rec]) => {
+      const dayTotal = getDayTotalChars(rec);
+      totalTrackerChars += dayTotal;
+      if (dayTotal > 0) activeDays++;
+      if (dayTotal > bestDay) bestDay = dayTotal;
 
-      if (rec.completed) {
-        doneDays++;
-        if (key.startsWith(monthPrefix)) monthDone++;
+      if (rec.entries) {
+        Object.entries(rec.entries).forEach(([bId, val]) => {
+          bookTrackerTotals[bId] = (bookTrackerTotals[bId] || 0) + (Number(val) || 0);
+        });
       }
 
-      Object.entries(rec.byProject || {}).forEach(([pid, c]) => {
-        perProjectTracker[pid] = (perProjectTracker[pid] || 0) + (Number(c) || 0);
-      });
+      if (rec.completed) {
+        daysDone++;
+        if (key.startsWith(monthPrefix)) monthDone++;
+      }
     });
 
-    const completedDates = Object.keys(state.days).filter(k => state.days[k].completed).sort();
+    const completedDates = Object.keys(state.records).filter(k => state.records[k].completed).sort();
     let bestStreak = 0, tempStreak = 0, prevDate = null;
-
-    completedDates.forEach(ds => {
-      const curr = parseDateKey(ds);
+    completedDates.forEach(dateStr => {
+      const curr = parseDateKey(dateStr);
       if (prevDate) {
         const diff = Math.round((curr - prevDate) / 86400000);
-        tempStreak = diff === 1 ? tempStreak + 1 : 1;
+        tempStreak = (diff === 1) ? tempStreak + 1 : 1;
       } else {
         tempStreak = 1;
       }
@@ -1265,12 +1221,15 @@
 
     let currentStreak = 0;
     let checkDate = new Date();
-    if (!getDayRecord(formatDateKey(checkDate)).completed) {
+    let checkKey = formatDateKey(checkDate);
+    if (!getDayRecord(checkKey).completed) {
       checkDate.setDate(checkDate.getDate() - 1);
+      checkKey = formatDateKey(checkDate);
     }
-    while (getDayRecord(formatDateKey(checkDate)).completed) {
+    while (getDayRecord(checkKey).completed) {
       currentStreak++;
       checkDate.setDate(checkDate.getDate() - 1);
+      checkKey = formatDateKey(checkDate);
     }
 
     const avg = activeDays > 0 ? Math.round(totalTrackerChars / activeDays) : 0;
@@ -1278,61 +1237,69 @@
 
     document.getElementById('statTotalChars').textContent = totalTrackerChars.toLocaleString('ru-RU');
     document.getElementById('statPages').textContent = `≈ ${pages} стр. А4`;
-    document.getElementById('statDoneDays').textContent = doneDays;
-    document.getElementById('statMonthDays').textContent = `За месяц: ${monthDone}`;
+    document.getElementById('statDaysDone').textContent = daysDone;
+    document.getElementById('statMonthDone').textContent = `За месяц: ${monthDone}`;
     document.getElementById('statStreak').textContent = `${currentStreak} дн.`;
     document.getElementById('statBestStreak').textContent = `Рекорд: ${bestStreak} дн.`;
-    document.getElementById('statAvg').textContent = avg.toLocaleString('ru-RU');
-    document.getElementById('statMax').textContent = `Максимум: ${maxDay.toLocaleString('ru-RU')}`;
+    document.getElementById('statAvgChars').textContent = avg.toLocaleString('ru-RU');
+    document.getElementById('statBestDay').textContent = `Максимум: ${bestDay.toLocaleString('ru-RU')}`;
 
-    const booksSummary = document.getElementById('booksSummary');
-    booksSummary.innerHTML = '';
-
-    state.projects.forEach(proj => {
-      const base = Number(proj.baseChars) || 0;
-      const added = perProjectTracker[proj.id] || 0;
+    const summaryList = document.getElementById('booksSummaryList');
+    summaryList.innerHTML = '';
+    state.books.forEach(book => {
+      const base = Number(book.baseChars) || 0;
+      const added = bookTrackerTotals[book.id] || 0;
       const grandTotal = base + added;
       const bookPages = (grandTotal / 2000).toFixed(1).replace('.0', '');
 
-      const row = document.createElement('div');
-      row.className = 'book-stat-row';
-      row.innerHTML = `
-        <div class="book-stat-info">
-          <span class="book-stat-name">${proj.name}</span>
-          <span class="book-stat-breakdown">Было: ${base.toLocaleString('ru-RU')} + в трекере: ${added.toLocaleString('ru-RU')}</span>
+      const item = document.createElement('div');
+      item.className = 'book-stat-item';
+      item.innerHTML = `
+        <div>
+          <div class="book-stat-name">${book.name}</div>
+          <div class="book-stat-meta">Было: ${base.toLocaleString('ru-RU')} + в трекере: ${added.toLocaleString('ru-RU')}</div>
         </div>
         <div class="book-stat-total">
-          <div class="book-stat-chars">${grandTotal.toLocaleString('ru-RU')} зн.</div>
-          <div class="book-stat-pages">≈ ${bookPages} стр. А4</div>
+          ${grandTotal.toLocaleString('ru-RU')} зн.<br>
+          <span style="font-size:0.72rem;color:var(--muted);font-weight:500;">≈ ${bookPages} стр. А4</span>
         </div>
       `;
-      booksSummary.appendChild(row);
+      summaryList.appendChild(item);
     });
   }
 
-  // Управление книгами (модальное окно)
-  const booksModal = document.getElementById('booksModal');
-  const bookManageList = document.getElementById('bookManageList');
+  function renderAll() {
+    renderProjectSelector();
+    renderDayEditor();
+    renderCalendar();
+    renderAnalytics();
+  }
 
-  function renderBooksModal() {
-    bookManageList.innerHTML = '';
-    state.projects.forEach(proj => {
-      const item = document.createElement('div');
-      item.className = 'book-manage-item';
+  // Управление книгами (модалка)
+  const booksModal = document.getElementById('booksModal');
+  function renderBooksManager() {
+    const list = document.getElementById('booksManageList');
+    list.innerHTML = '';
+    state.books.forEach(book => {
+      const div = document.createElement('div');
+      div.className = 'book-manage-item';
 
       const top = document.createElement('div');
       top.className = 'book-manage-top';
-      top.innerHTML = `<strong>${proj.name}</strong>`;
+      const titleSpan = document.createElement('span');
+      titleSpan.textContent = book.name;
+      top.appendChild(titleSpan);
 
-      if (state.projects.length > 1) {
+      if (state.books.length > 1) {
         const delBtn = document.createElement('button');
-        delBtn.className = 'del-book-btn';
         delBtn.textContent = 'Удалить';
+        delBtn.style.cssText = 'background:none;border:none;color:var(--danger);font-size:0.8rem;cursor:pointer;font-weight:600;';
         delBtn.onclick = () => {
-          if (confirm(`Удалить книгу «${proj.name}» из списка?`)) {
-            state.projects = state.projects.filter(p => p.id !== proj.id);
+          if (confirm(`Удалить книгу «${book.name}» из списка?`)) {
+            state.books = state.books.filter(b => b.id !== book.id);
+            if (state.selectedBookId === book.id) state.selectedBookId = state.books[0].id;
             saveState();
-            renderBooksModal();
+            renderBooksManager();
             renderAll();
           }
         };
@@ -1340,172 +1307,105 @@
       }
 
       const baseRow = document.createElement('div');
-      baseRow.className = 'book-manage-base';
-      baseRow.innerHTML = `<span>Уже написано:</span>`;
-
-      const baseInput = document.createElement('input');
-      baseInput.type = 'number';
-      baseInput.min = '0';
-      baseInput.step = '100';
-      baseInput.value = proj.baseChars || 0;
-      baseInput.addEventListener('change', (e) => {
-        proj.baseChars = Math.max(0, Math.floor(Number(e.target.value) || 0));
+      baseRow.className = 'book-base-row';
+      baseRow.innerHTML = '<span>Уже написано:</span>';
+      const baseInp = document.createElement('input');
+      baseInp.type = 'number';
+      baseInp.className = 'book-base-input';
+      baseInp.value = Number(book.baseChars) || 0;
+      baseInp.min = 0;
+      baseInp.onchange = () => {
+        book.baseChars = Math.max(0, Number(baseInp.value) || 0);
         saveState();
         renderAnalytics();
-      });
+      };
+      baseRow.appendChild(baseInp);
+      baseRow.appendChild(document.createTextNode(' зн.'));
 
-      baseRow.appendChild(baseInput);
-      item.appendChild(top);
-      item.appendChild(baseRow);
-      bookManageList.appendChild(item);
+      div.appendChild(top);
+      div.appendChild(baseRow);
+      list.appendChild(div);
     });
   }
 
-  document.getElementById('openBooksBtn').addEventListener('click', () => {
-    renderBooksModal();
+  document.getElementById('openBooksBtn').onclick = () => {
+    renderBooksManager();
     booksModal.classList.add('open');
-  });
+  };
+  document.getElementById('closeBooksBtn').onclick = () => booksModal.classList.remove('open');
+  booksModal.onclick = (e) => { if (e.target === booksModal) booksModal.classList.remove('open'); };
 
-  document.getElementById('closeBooksBtn').addEventListener('click', () => {
-    booksModal.classList.remove('open');
-  });
-
-  booksModal.addEventListener('click', (e) => {
-    if (e.target === booksModal) booksModal.classList.remove('open');
-  });
-
-  document.getElementById('createBookBtn').addEventListener('click', () => {
-    const nameInput = document.getElementById('newBookName');
-    const baseInput = document.getElementById('newBookBase');
-    const name = nameInput.value.trim();
+  document.getElementById('createBookBtn').onclick = () => {
+    const nameInp = document.getElementById('newBookName');
+    const baseInp = document.getElementById('newBookBase');
+    const name = nameInp.value.trim();
     if (!name) return;
 
-    const newProj = {
+    const newBook = {
       id: 'book_' + Date.now(),
       name,
-      baseChars: Math.max(0, Math.floor(Number(baseInput.value) || 0))
+      baseChars: Math.max(0, Number(baseInp.value) || 0)
     };
-
-    state.projects.push(newProj);
-    state.selectedProjectId = newProj.id;
-    nameInput.value = '';
-    baseInput.value = '';
-
+    state.books.push(newBook);
+    state.selectedBookId = newBook.id;
+    nameInp.value = '';
+    baseInp.value = '';
     saveState();
-    renderBooksModal();
+    renderBooksManager();
     renderAll();
+  };
+
+  // События главного экрана
+  document.getElementById('projectSelect').onchange = (e) => {
+    state.selectedBookId = e.target.value;
+    saveState(true);
+  };
+
+  const charInput = document.getElementById('charInput');
+  document.getElementById('addCustomBtn').onclick = () => {
+    addCharsToDay(charInput.value);
+    charInput.value = '';
+  };
+
+  charInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      addCharsToDay(charInput.value);
+      charInput.value = '';
+    }
   });
 
-  // Облачная синхронизация (Supabase REST API без конфликта Bearer)
-  const syncKeyInput = document.getElementById('syncKeyInput');
-  const syncStatus = document.getElementById('syncStatus');
-  const forceSyncBtn = document.getElementById('forceSyncBtn');
-
-  let currentSyncKey = localStorage.getItem(SYNC_KEY_STORAGE) || '';
-  if (currentSyncKey) {
-    syncKeyInput.value = currentSyncKey;
-    forceSyncBtn.style.display = 'block';
-  }
-
-  function setSyncUI(msg, type = '') {
-    syncStatus.textContent = msg;
-    syncStatus.className = 'sync-status' + (type ? ' ' + type : '');
-  }
-
-  function getSupabaseHeaders(extra = {}) {
-    const headers = {
-      'apikey': SUPABASE_ANON_KEY,
-      'Content-Type': 'application/json',
-      ...extra
-    };
-    if (SUPABASE_ANON_KEY.startsWith('eyJ')) {
-      headers['Authorization'] = `Bearer ${SUPABASE_ANON_KEY}`;
-    }
-    return headers;
-  }
-
-  async function pullFromCloud(isInitialConnect = false) {
-    if (!currentSyncKey) return;
-    setSyncUI('Синхронизация с облаком...');
-
-    try {
-      const url = `${SUPABASE_URL}/rest/v1/tracker_sync?sync_key=eq.${encodeURIComponent(currentSyncKey)}&select=*`;
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: getSupabaseHeaders()
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`HTTP ${res.status}: ${errText || res.statusText}`);
-      }
-
-      const rows = await res.json();
-
-      if (rows && rows.length > 0 && rows[0].payload) {
-        const cloudState = rows[0].payload;
-        if (isInitialConnect || (cloudState.updatedAt || 0) > (state.updatedAt || 0)) {
-          state = cloudState;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          renderAll();
-          setSyncUI(`Синхронизировано (загружено из облака в ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})`, 'ok');
-        } else {
-          await pushToCloud();
-        }
-      } else {
-        await pushToCloud();
-      }
-    } catch (err) {
-      setSyncUI(`Ошибка связи: ${err.message}`, 'err');
-    }
-  }
-
-  async function pushToCloud() {
-    if (!currentSyncKey) return;
-
-    try {
-      const url = `${SUPABASE_URL}/rest/v1/tracker_sync?on_conflict=sync_key`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: getSupabaseHeaders({
-          'Prefer': 'resolution=merge-duplicates,return=minimal'
-        }),
-        body: JSON.stringify({
-          sync_key: currentSyncKey,
-          payload: state,
-          updated_at: new Date().toISOString()
-        })
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`HTTP ${res.status}: ${errText || res.statusText}`);
-      }
-
-      setSyncUI(`Синхронизировано (${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})`, 'ok');
-    } catch (err) {
-      setSyncUI(`Ошибка сохранения: ${err.message}`, 'err');
-    }
-  }
-
-  document.getElementById('connectSyncBtn').addEventListener('click', () => {
-    const val = syncKeyInput.value.trim();
-    if (!val) {
-      alert('Введите секретный код для синхронизации');
-      return;
-    }
-    currentSyncKey = val;
-    localStorage.setItem(SYNC_KEY_STORAGE, currentSyncKey);
-    forceSyncBtn.style.display = 'block';
-    pullFromCloud(true);
+  document.querySelectorAll('.quick-btn[data-add]').forEach(btn => {
+    btn.onclick = () => addCharsToDay(btn.dataset.add);
   });
 
-  forceSyncBtn.addEventListener('click', () => {
-    pullFromCloud(false);
-  });
+  document.getElementById('clearDayBtn').onclick = () => {
+    delete state.records[selectedDateKey];
+    saveState();
+    renderAll();
+  };
 
-  // Резервные копии JSON
-  document.getElementById('exportBtn').addEventListener('click', () => {
+  document.getElementById('completeBtn').onclick = toggleComplete;
+
+  document.getElementById('jumpTodayBtn').onclick = () => {
+    selectedDateKey = todayKey;
+    viewDate = new Date();
+    renderAll();
+  };
+
+  document.getElementById('prevMonthBtn').onclick = () => {
+    viewDate.setMonth(viewDate.getMonth() - 1);
+    renderCalendar();
+    renderAnalytics();
+  };
+
+  document.getElementById('nextMonthBtn').onclick = () => {
+    viewDate.setMonth(viewDate.getMonth() + 1);
+    renderCalendar();
+    renderAnalytics();
+  };
+
+  // Бэкап JSON
+  document.getElementById('exportBtn').onclick = () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -1513,54 +1413,118 @@
     a.download = `writer-backup-${todayKey}.json`;
     a.click();
     URL.revokeObjectURL(url);
-  });
+  };
 
   const importFile = document.getElementById('importFile');
-  document.getElementById('importBtn').addEventListener('click', () => importFile.click());
-
-  importFile.addEventListener('change', (e) => {
+  document.getElementById('importBtn').onclick = () => importFile.click();
+  importFile.onchange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
       try {
         const imported = JSON.parse(ev.target.result);
-        if (imported && Array.isArray(imported.projects) && imported.days) {
-          state = imported;
-        } else if (typeof imported === 'object' && imported !== null) {
-          Object.entries(imported).forEach(([k, v]) => {
-            const c = Number(v.chars || 0);
-            const done = Boolean(v.completed || v.done);
-            if (c > 0 || done) {
-              state.days[k] = {
-                byProject: c > 0 ? { [state.selectedProjectId]: c } : {},
-                completed: done,
-                manualOverride: Boolean(v.manualOverride || v.manual)
-              };
-            }
-          });
-        }
+        state = sanitizeState(imported);
         saveState();
         renderAll();
-        alert('Резервная копия успешно загружена!');
-      } catch (err) {
-        alert('Не удалось прочитать файл резервной копии.');
+        alert('Данные успешно восстановлены!');
+      } catch {
+        alert('Ошибка чтения файла.');
       }
     };
     reader.readAsText(file);
-  });
+  };
 
-  function renderAll() {
-    renderProjectSelector();
-    renderDayCard();
-    renderCalendar();
-    renderAnalytics();
+  // Облачная синхронизация Supabase
+  const syncKeyInput = document.getElementById('syncKeyInput');
+  const connectSyncBtn = document.getElementById('connectSyncBtn');
+  const syncStatusText = document.getElementById('syncStatusText');
+  const forceSyncBtn = document.getElementById('forceSyncBtn');
+
+  function setSyncStatus(msg, type = '') {
+    syncStatusText.className = 'sync-status ' + type;
+    syncStatusText.firstElementChild.textContent = msg;
+    forceSyncBtn.style.display = syncCode ? 'inline' : 'none';
+  }
+
+  async function pullFromCloud() {
+    if (!syncCode) return;
+    setSyncStatus('Проверка облака...', '');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/tracker_sync?sync_key=eq.${encodeURIComponent(syncCode)}&select=payload`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errText}`);
+      }
+      const rows = await res.json();
+      if (rows.length > 0 && rows[0].payload) {
+        const remote = sanitizeState(rows[0].payload);
+        if ((remote.updatedAt || 0) > (state.updatedAt || 0)) {
+          state = remote;
+          localStorage.setItem(STATE_KEY, JSON.stringify(state));
+          renderAll();
+          setSyncStatus(`Синхронизировано (загружено из облака в ${new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'})})`, 'ok');
+          return;
+        }
+      }
+      await pushToCloud();
+    } catch (e) {
+      setSyncStatus('Ошибка связи: ' + e.message, 'err');
+    }
+  }
+
+  async function pushToCloud() {
+    if (!syncCode) return;
+    try {
+      state = sanitizeState(state);
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/tracker_sync`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify({
+          sync_key: syncCode,
+          payload: state,
+          updated_at: new Date().toISOString()
+        })
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errText}`);
+      }
+      setSyncStatus(`Синхронизировано (${new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'})})`, 'ok');
+    } catch (e) {
+      setSyncStatus('Ошибка сохранения: ' + e.message, 'err');
+    }
+  }
+
+  connectSyncBtn.onclick = () => {
+    const val = syncKeyInput.value.trim();
+    if (!val) {
+      alert('Введите ваш секретный код синхронизации.');
+      return;
+    }
+    syncCode = val;
+    localStorage.setItem(SYNC_CODE_KEY, syncCode);
+    pullFromCloud();
+  };
+
+  forceSyncBtn.onclick = () => pullFromCloud();
+
+  if (syncCode) {
+    syncKeyInput.value = syncCode;
+    connectSyncBtn.textContent = 'Сменить код';
+    pullFromCloud();
   }
 
   renderAll();
-  if (currentSyncKey) {
-    pullFromCloud(false);
-  }
 </script>
 </body>
 </html>
